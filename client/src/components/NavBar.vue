@@ -11,6 +11,9 @@
                     <li class="nav-item">
                         <router-link class="nav-link logout-btn" :to="'/'">Home</router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link logout-btn" :to="'/label'">Contribute</router-link>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ">
