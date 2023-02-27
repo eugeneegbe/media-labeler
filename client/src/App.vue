@@ -1,12 +1,18 @@
 <template>
-  <h1>Hi,  Welcome to the Commons Labeler Tool</h1>
+  <NavBar />
+  <h1>Hi, Welcome to the Commons Labeler Tool</h1>
 </template>
 
 <script>
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import NavBar from './components/NavBar'
 
 export default {
   name: 'App',
-  components: {}
+  components: {
+    NavBar
+  }
 }
 </script>
 
@@ -17,6 +23,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
