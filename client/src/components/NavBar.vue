@@ -9,15 +9,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link logout-btn" to="/login">Home</a>
+                        <router-link class="nav-link logout-btn" :to="'/'">Home</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item ">
-                        <a class="nav-link logout-btn" @click="logout">Login</a>
+                        <a class="nav-link log-btn" @click="logout">Login</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link logout-btn" @click="logout">Logout</a>
+                        <a class="nav-link log-btn" @click="logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -49,7 +49,11 @@ export default {
     margin: 4px;
     font-weight: 700;
 }
-.logout-btn {
+.navbar a:hover{
+    color: white;
+    border-bottom: 1px solid black;
+}
+.log-btn {
     cursor: pointer;
 }
 
