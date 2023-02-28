@@ -22,7 +22,7 @@
                 <div class="edit-box-header">
                     <h4>Capture Gender</h4>
                     <div edit-type="depicts" class="edit-publish-btn-group text-right">
-                        <button class="btn btn-sm btn-link cancel-edits-btn" title="Cancel your changes">Cancel</button>
+                        <button class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn" title="Cancel your changes">Cancel</button>
                         <button type="submit" class="btn btn-sm btn-primary publish-edits-btn" title="Save your edits">Save</button>
                     </div>
                     <p>Does the Image represent A 'Male' or 'Female'?</p>
@@ -196,5 +196,12 @@ button.btn.btn-link {
     border-bottom: 1px solid black;
     background-color: rgb(161 177 205);
     font-weight: 600;
+}
+.btn-link-danger{
+    color: red;
+}
+.btn-link-danger:hover{
+    color: red;
+    font-weight: bolder;
 }
 </style>
