@@ -23,3 +23,5 @@ client/pnpm-debug.log*
 *.sw?
 
 /server/node_modules
+
+/server/db/labeler.db
