@@ -22,8 +22,8 @@
                 <div class="edit-box-header">
                     <h4>Capture Gender</h4>
                     <div edit-type="depicts" class="edit-publish-btn-group text-right">
-                        <button class="btn btn-sm btn-link cancel-edits-btn" disabled title="Cancel your changes">Cancel</button>
-                        <button type="submit" class="btn btn-sm btn-primary publish-edits-btn" disabled title="Save your edits">Save</button>
+                        <button class="btn btn-sm btn-link cancel-edits-btn" title="Cancel your changes">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary publish-edits-btn" title="Save your edits">Save</button>
                     </div>
                     <p>Does the Image represent A 'Male' or 'Female'?</p>
                 </div>
@@ -31,6 +31,7 @@
                     <div class="input-group mb-3 edit-answer-box">
                         <button class="btn btn-md"  >Male</button>
                         <button type="button" class="btn btn-md">Female</button>
+                        <button type="button" class="btn btn-md btn-warning">Not sure</button>
                     </div>
                 </div>
             </div>
