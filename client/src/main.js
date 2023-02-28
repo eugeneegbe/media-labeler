@@ -4,9 +4,9 @@ import router from './routers'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCaretLeft, faCaretRight)
+library.add(faChevronLeft, faChevronRight)
 
 createApp(App).
 component('font-awesome-icon', FontAwesomeIcon).

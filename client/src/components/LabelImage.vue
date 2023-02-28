@@ -2,11 +2,11 @@
     <NavBar />
     <div class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
-            <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav" title="View the previous image"><font-awesome-icon class="arrow" icon="fa-solid fa-caret-left" />PREV IMAGE</button>
+            <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav" title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV IMAGE</button>
             <div class="img-holder"><img :src="this.images[this.index].url" alt="File here"><!-- src updated by JavaScript -->
             </div>
             <button  v-on:click="nextImage()" id="" class="next-image-btn btn btn-link desktop-img-nav btn-lg" title="View the next image">NEXT
-                IMAGE<font-awesome-icon class="arrow" icon="fa-solid fa-caret-right" /></button>
+                IMAGE<font-awesome-icon class="arrow" icon="fa fa-chevron-right" /></button>
         </div>
         <div class="container px-0 bg-light">
             <div id="edit_image_info">
