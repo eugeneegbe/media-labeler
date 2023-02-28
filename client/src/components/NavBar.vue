@@ -11,15 +11,15 @@
                     <li class="nav-item">
                         <router-link class="nav-link logout-btn" :to="'/'">Home</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li v-if="username" class="nav-item">
                         <router-link class="nav-link logout-btn" :to="'/label'">Contribute</router-link>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link log-btn" @click="logout">Login</a>
+                    <li v-if="!username" class="nav-item ">
+                        <a class="nav-link log-btn" @click="login">Login</a>
                     </li>
-                    <li class="nav-item ">
+                    <li v-else class="nav-item ">
                         <a class="nav-link log-btn" @click="logout">Logout</a>
                     </li>
                 </ul>
@@ -31,13 +31,16 @@
 <script>
 export default {
     name: "NavBar",
+    data() {
+        return {
+            username: null
+        }
+    },
     methods: {
         logout() { }
     }
 }
 </script>
-
-
 <style>
 .navbar{
     background-color: #6690da;
