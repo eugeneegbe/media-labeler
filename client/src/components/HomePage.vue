@@ -8,7 +8,12 @@
             <button  v-on:click="selectCulture()" type="button" class="btn btn-lg btn-outline-primary">Culture</button>
         </div>
     </div>
-    <router-link :to="'/label/'+this.track" type="button" class="btn btn-lg "> Go <font-awesome-icon class="arrow" icon="fa fa-chevron-right" /></router-link>
+    <router-link :to="'/label/'+this.track" class="btn go">
+        <span class="go-btn">
+            <p class="mt-3">Next</p> 
+            <font-awesome-icon class="arrow" icon="fa fa-chevron-right" />
+        </span>
+    </router-link>
 </template>
 
 <script>
@@ -44,7 +49,23 @@
 .select-track button{
     position: relative;
     float: left;
-    font-size: 70px;
+    font-size: 50px;
     margin: 20px;
+}
+.go{
+    font-size: 30px;
+}
+.go:hover{
+    border-bottom: 1px solid black;
+}
+
+.go-btn{
+    margin: auto;
+    display: inline-flex;
+}
+
+.go-btn p{
+    margin-top: 0rem!important;
+    margin-right: 10px!important;
 }
 </style>
