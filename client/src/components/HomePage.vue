@@ -2,7 +2,13 @@
     <NavBar />
     <div class="container text-center  mt-5 mb-5">
         <h1 class="mb-4 ">Hi, Welcome to the Commons Labeler Tool</h1>
+        <h4 class="mb-4 ">Select track</h4>
+        <div class="bb-4 select-track">
+            <button v-on:click="selectGender()" type="button" class="btn btn-lg btn-outline-info mr-5">Gender</button>
+            <button  v-on:click="selectCulture()" type="button" class="btn btn-lg btn-outline-primary">Culture</button>
+        </div>
     </div>
+    <router-link :to="'/label/'+this.track" type="button" class="btn btn-lg "> Go <font-awesome-icon class="arrow" icon="fa fa-chevron-right" /></router-link>
 </template>
 
 <script>
@@ -11,9 +17,34 @@
         name: 'HomePage',
         components: {
             NavBar
+        },
+        data(){
+            return{
+                track: null
+            }
+        },
+        methods: {
+            selectGender(){
+                this.track = 'gender' 
+            },
+            selectCulture(){
+                this.track = 'culture'
+            }
+        },
+        mounted(){
         }
     }
 </script>
 
 <style>
+.select-track{
+    display: inline-block;
+    margin-top: 20px;
+}
+.select-track button{
+    position: relative;
+    float: left;
+    font-size: 70px;
+    margin: 20px;
+}
 </style>

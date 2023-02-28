@@ -17,6 +17,10 @@
                 </div>
             </div>
         </div>
+        <div class="container px-0 bg.light">
+            <p v-if="this.track === 'gender'"> Looking at Gender </p>
+            <p v-if="this.track === 'culture'"> Looking at Culture</p>
+        </div>
     </div>
 </template>
 
@@ -53,7 +57,8 @@ export default {
                     categories: "Aleko | Konstantinov."
                 }
             ],
-            index: 0
+            index: 0,
+            track: null
         }
     },
 
@@ -76,7 +81,14 @@ export default {
     },
 
     mounted(){
-        this.index = Math.floor(Math.random() * (this.images.length - 1))
+        let selectedTrack = this.$route.params.track;
+        if(selectedTrack !== 'null'){
+            this.track = this.$route.params.track;
+            this.index = Math.floor(Math.random() * (this.images.length - 1))
+        }else{
+            this.$router.push({name: 'HomePage'});
+        }
+
     }
 }
 </script>

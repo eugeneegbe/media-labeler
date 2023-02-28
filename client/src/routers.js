@@ -11,7 +11,7 @@ const routes = [
     {
         name: 'LabelImage',
         component: LabelImage,
-        path: '/label'
+        path: '/label/:track'
     }
 ]
 
