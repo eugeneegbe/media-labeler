@@ -3,6 +3,7 @@ var session = require("express-session");
 var passport = require("passport");
 var MediaWikiStrategy = require("passport-mediawiki-oauth").OAuthStrategy;
 var config = require("./config");
+var userRouter = require('./routes/user')
 
 var app = express();
 var router = express.Router();
@@ -10,6 +11,7 @@ var router = express.Router();
 app.set("views", __dirname + "/public/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public/views"));
+app.use('/users', userRouter);
 
 app.use(session({
     secret: "OAuth Session",
@@ -47,10 +49,6 @@ passport.deserializeUser(function (obj, done) {
 });
 
 router.get("/", function (req, res) {
-    // res.render("index", {
-    //     user: req && req.session && req.session.user,
-    //     url: req.baseUrl
-    // });
     res.send(`welcome home ${req.session}` )
 });
 
@@ -84,6 +82,7 @@ router.get("/logout", function (req, res) {
     delete req.session.user;
     res.redirect(req.baseUrl + "/");
 });
+
 
 app.listen(process.env.PORT || 8000, function () {
     console.log("Node.js app listening on port 8000!");
