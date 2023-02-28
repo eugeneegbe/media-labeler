@@ -18,7 +18,23 @@
             </div>
         </div>
         <div class="container px-0 bg.light">
-            <p v-if="this.track === 'gender'"> Looking at Gender </p>
+            <div v-if="this.track === 'gender'" class="container edit-box">
+                <div class="edit-box-header">
+                    <h4>Capture Gender</h4>
+                    <div edit-type="depicts" class="edit-publish-btn-group text-right">
+                        <button class="btn btn-sm btn-link cancel-edits-btn" disabled title="Cancel your changes">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-primary publish-edits-btn" disabled title="Save your edits">Save</button>
+                    </div>
+                    <p>Does the Image represent A 'Male' or 'Female'?</p>
+                </div>
+                <div class="depicts-search">
+                    <div class="input-group mb-3 edit-answer-box">
+                        <button class="btn btn-md"  >Male</button>
+                        <button type="button" class="btn btn-md">Female</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Display for Culture setup -->
             <p v-if="this.track === 'culture'"> Looking at Culture</p>
         </div>
     </div>
@@ -147,5 +163,37 @@ button.btn.btn-link {
 .arrow {
     font-size: 3rem;
     vertical-align: middle;
+}
+
+.container.edit-box {
+    margin-top: 10px;
+    padding: 10px;
+    border: solid 1px #a2a9b1;
+    border-radius: 5px;
+}
+
+.edit-box-header {
+    position: relative;
+}
+
+.edit-publish-btn-group {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.edit-answer-box {
+    display: contents;
+}
+.edit-answer-box button{
+    margin: 20px;
+    right: 0;
+    left: 0;
+    width: 100px;
+}
+.edit-answer-box button:hover{
+    border-bottom: 1px solid black;
+    background-color: rgb(161 177 205);
+    font-weight: 600;
 }
 </style>
