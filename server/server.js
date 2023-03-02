@@ -3,15 +3,21 @@ var session = require("express-session");
 var passport = require("passport");
 var MediaWikiStrategy = require("passport-mediawiki-oauth").OAuthStrategy;
 var config = require("./config");
+var cors = require('cors');
 var userRouter = require('./routes/user')
+var contributionRouter = require('./routes/contribution')
 
 var app = express();
 var router = express.Router();
 
+app.use(cors())
+app.use(express.json());
 app.set("views", __dirname + "/public/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public/views"));
 app.use('/users', userRouter);
+app.use('/contribution', contributionRouter);
+
 
 app.use(session({
     secret: "OAuth Session",
