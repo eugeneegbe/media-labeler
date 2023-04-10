@@ -5,7 +5,8 @@
         <h4 class="mb-4 ">Select track</h4>
         <div class="bb-4 select-track">
             <button v-on:click="selectGender()" type="button" class="btn btn-lg btn-outline-info mr-5">Gender</button>
-            <button  v-on:click="selectCulture()" type="button" class="btn btn-lg btn-outline-primary">Culture</button>
+            <button  v-on:click="selectCulture()" type="button" class="btn btn-lg btn-outline-primary">Food/Culture</button>
+            <button v-on:click="selectCloth()" type="button" class="btn btn-lg btn-outline-dark mr-5">Cloth/Dress</button>
         </div>
     </div>
     <div v-if="this.track">
@@ -36,6 +37,9 @@
             },
             selectCulture(){
                 this.track = 'culture'
+            },
+            selectCloth(){
+                this.track = 'cloth' 
             }
         },
         mounted(){
