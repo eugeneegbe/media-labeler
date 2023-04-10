@@ -9,6 +9,8 @@ import {FlashMessage} from '@smartweb/vue-flash-message';
 
 library.add(faChevronLeft, faChevronRight)
 
-createApp(App).
-component('font-awesome-icon', FontAwesomeIcon).
-use(router, FlashMessage).mount('#app')
+createApp(App)
+    .use(router)
+    .use(FlashMessage)
+    .component('font-awesome-icon', FontAwesomeIcon)
+    .mount('#app')

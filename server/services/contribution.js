@@ -13,9 +13,29 @@ function getMultiple(page = 1) {
 }
 
 function addContribution(contribtion_object){
-    const {filename, track, response, username} = contribtion_object;
-    const feed = db.run('INSERT INTO contribution(filename, track, response, username) VALUES(@filename, @track, @response, @username)',
-                        {filename, track, response, username});
+
+    const {username, filename, track, response} = contribtion_object;
+    console.log('response', response)
+
+    let feed = ''
+
+    if (track == 'gender') {
+        const {clarity, identity_type, depict_accuracy, subject_relevance} = response
+        feed = db.run('INSERT INTO gender(username, filename, clarity, identity_type, depict_accuracy, subject_relevance)\
+                VALUES(@username, @filename, @clarity, @identity_type, @depict_accuracy, @subject_relevance)',
+                {username, filename, clarity, identity_type, depict_accuracy, subject_relevance});
+    }else if(track == 'culture'){
+        const {region, familiarity, subject_relevance}  = response
+        feed = db.run('INSERT INTO culture(username, filename, region, familiarity, subject_relevance)\
+                VALUES(@username, @filename, @region, @familiarity, @subject_relevance)',
+                {username, filename, region, familiarity, subject_relevance});
+    }else{
+        const {region, accuracy, representation}  = response
+        feed = db.run('INSERT INTO culture(username, filename, region, accuracy, representation)\
+                VALUES(@username, @filename, @region, @accuracy, @representation)',
+                {username, filename, region, accuracy, representation});
+    }
+
     let res = {}
     if (feed.changes) {
         res.status = 'success';

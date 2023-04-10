@@ -1,5 +1,8 @@
 <template>
     <NavBar />
+    <div v-if="this.contribution_saved" class="alert alert-success" role="alert">
+        Contribution successful!
+    </div>
     <div class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav" title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV IMAGE</button>
@@ -17,23 +20,19 @@
                 </div>
             </div>
         </div>
+        <div class="edit-box-header">
+        <h4>Capture Gender</h4>
+        <div edit-type="depicts" class="edit-publish-btn-group text-right">
+            <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn"
+                title="Cancel your changes">Cancel</button>
+            <button v-on:click="makeContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn"
+                title="Save your edits">Save</button>
+        </div>
+    </div>
         <div class="container px-0 bg.light">
             <div v-if="this.track === 'gender'" class="container edit-box">
-                <div class="edit-box-header">
-                    <h4>Capture Gender</h4>
-                    <div edit-type="depicts" class="edit-publish-btn-group text-right">
-                        <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn" title="Cancel your changes">Cancel</button>
-                        <button v-on:click="makeContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn" title="Save your edits">Save</button>
-                    </div>
-                    <p>Does the Image represent A 'Male' or 'Female'?</p>
-                </div>
-                <div class="depicts-search">
-                    <div class="input-group mb-3 edit-answer-box">
-                        <button v-on:click="setContributionToMale" type="button" class="btn btn-md">Male</button>
-                        <button v-on:click="setContributionToFemale" type="button" class="btn btn-md">Female</button>
-                        <button v-on:click="setContributionToNotSure" type="button" class="btn btn-md btn-warning">Not sure</button>
-                    </div>
-                </div>
+                <!-- Add gender track here -->
+                <GenderContribution ref="genderContribution" :filename="this.images[this.index].filename"/>
             </div>
             <!-- Display for Culture setup -->
             <p v-if="this.track === 'culture'"> Looking at Culture</p>
@@ -44,9 +43,14 @@
 <script>
 import NavBar from './NavBar';
 import axios from 'axios';
+import GenderContribution from './GenderContribution';
 
 export default {
     name: 'LabelImage',
+    components:{
+        NavBar,
+        GenderContribution
+    },
     data(){
         return {
             images: [
@@ -77,8 +81,9 @@ export default {
             ],
             index: 0,
             track: '',
-            genderResponse: '',
-            cultureResponse: ''
+            genderResponse: {},
+            cultureResponse: {},
+            contribution_saved: null
         }
     },
 
@@ -88,6 +93,7 @@ export default {
             if(this.index === this.images.length){
                 this.index = 0;
             }
+            this.forceToReload()
         },
         prevImage(){
             this.index--;
@@ -95,45 +101,44 @@ export default {
                 this.index = this.images.length - 1
             }
         },
-        setContributionToMale(){
-            this.genderResponse = 'Male'
-        },
-        setContributionToFemale(){
-            this.genderResponse = 'Female'
-        },
-        setContributionToNotSure(){
-            this.genderResponse = 'Not sure'
-        },
         async sendContribution(contribution){
             let result = await axios.post('http://localhost:8000/contribution', contribution);
             if(result.data.status == 'success'){
-                return true
-            }else{
-                return false;
+                return result.data
             }
+            return null
         },
-        makeContribution(){
-            if(this.genderResponse || this.cultureResponse){
+        async makeContribution(){
+            if(this.track){
                 let contribution = {}
                 contribution.filename = this.images[this.index].filename
                 contribution.track = this.track
                 contribution.username = 'Eugene233'
-                if(this.track === 'gender'){
-                    contribution.response = this.genderResponse
-                }else{
-                    contribution.response = this.cultureResponse
+                switch (this.track) {
+                    case 'gender':
+                        contribution.response = this.$refs.genderContribution.gender_data
+                        break;
+                    case 'culture':
+                        break;
+                    case 'cloth':
+                        break;
+                    default:
+                        break;
                 }
 
-                let isSaved = this.sendContribution(contribution)
-                if(isSaved){
-                    this.cultureRespons = null
-                    this.genderResponse = null
+                let isSaved = await this.sendContribution(contribution)
+                console.log('isSaved', isSaved)
+                if(isSaved.status == 'success'){
                     this.nextImage()
+                    // We need to add flash message here for success
+                    this.contribution_saved = true
                 }else{
+                    this.contribution_saved = null
                     console.log('saving did not work')
                 }
             }else{
-                alert('please select and option')
+                this.$route.push({name: 'HomePage'});
+                alert('please select a track to contribute')
             }
         },
         cancelContribution(){
@@ -144,10 +149,6 @@ export default {
             }
         }
     },
-    components: {
-        NavBar
-    },
-
     mounted(){
         let selectedTrack = this.$route.params.track;
         if(selectedTrack !== 'null'){
@@ -254,5 +255,23 @@ button.btn.btn-link {
 .btn-link-danger:hover{
     color: red;
     font-weight: bolder;
+}
+.input-group{
+    display: flexbox;
+    justify-content: space-between;
+    max-width: fit-content;
+    padding: 0 10px;
+}
+.question{
+    padding-right: 2rem;
+    font-size: larger;
+    font-weight: bolder;
+    float: left;
+    margin-left: 0;
+    text-align: left;
+}
+.response{
+    height: 2rem;
+    float: right
 }
 </style>
