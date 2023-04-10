@@ -31,7 +31,7 @@
                     <div class="input-group mb-3 edit-answer-box">
                         <button v-on:click="setContributionToMale" type="button" class="btn btn-md">Male</button>
                         <button v-on:click="setContributionToFemale" type="button" class="btn btn-md">Female</button>
-                        <button type="button" class="btn btn-md btn-warning">Not sure</button>
+                        <button v-on:click="setContributionToNotSure" type="button" class="btn btn-md btn-warning">Not sure</button>
                     </div>
                 </div>
             </div>
