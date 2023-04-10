@@ -22,15 +22,15 @@
                 <div class="edit-box-header">
                     <h4>Capture Gender</h4>
                     <div edit-type="depicts" class="edit-publish-btn-group text-right">
-                        <button class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn" title="Cancel your changes">Cancel</button>
-                        <button type="submit" class="btn btn-sm btn-primary publish-edits-btn" title="Save your edits">Save</button>
+                        <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn" title="Cancel your changes">Cancel</button>
+                        <button v-on:click="makeContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn" title="Save your edits">Save</button>
                     </div>
                     <p>Does the Image represent A 'Male' or 'Female'?</p>
                 </div>
                 <div class="depicts-search">
                     <div class="input-group mb-3 edit-answer-box">
-                        <button class="btn btn-md"  >Male</button>
-                        <button type="button" class="btn btn-md">Female</button>
+                        <button v-on:click="setContributionToMale" type="button" class="btn btn-md">Male</button>
+                        <button v-on:click="setContributionToFemale" type="button" class="btn btn-md">Female</button>
                         <button type="button" class="btn btn-md btn-warning">Not sure</button>
                     </div>
                 </div>
@@ -43,6 +43,7 @@
 
 <script>
 import NavBar from './NavBar';
+import axios from 'axios';
 
 export default {
     name: 'LabelImage',
@@ -75,7 +76,9 @@ export default {
                 }
             ],
             index: 0,
-            track: null
+            track: '',
+            genderResponse: '',
+            cultureResponse: ''
         }
     },
 
@@ -91,6 +94,54 @@ export default {
             if (this.index === 0) {
                 this.index = this.images.length - 1
             }
+        },
+        setContributionToMale(){
+            this.genderResponse = 'Male'
+        },
+        setContributionToFemale(){
+            this.genderResponse = 'Female'
+        },
+        setContributionToNotSure(){
+            this.genderResponse = 'Not sure'
+        },
+        async sendContribution(contribution){
+            let result = await axios.post('http://localhost:8000/contribution', contribution);
+            if(result.data.status == 'success'){
+                return true
+            }else{
+                return false;
+            }
+        },
+        makeContribution(){
+            if(this.genderResponse || this.cultureResponse){
+                let contribution = {}
+                contribution.filename = this.images[this.index].filename
+                contribution.track = this.track
+                contribution.username = 'Eugene233'
+                if(this.track === 'gender'){
+                    contribution.response = this.genderResponse
+                }else{
+                    contribution.response = this.cultureResponse
+                }
+
+                let isSaved = this.sendContribution(contribution)
+                if(isSaved){
+                    this.cultureRespons = null
+                    this.genderResponse = null
+                    this.nextImage()
+                }else{
+                    console.log('saving did not work')
+                }
+            }else{
+                alert('please select and option')
+            }
+        },
+        cancelContribution(){
+            if(this.track === 'gender'){
+                this.genderResponse = null
+            }else{
+                console.log('canceling culture')
+            }
         }
     },
     components: {
@@ -103,7 +154,7 @@ export default {
             this.track = this.$route.params.track;
             this.index = Math.floor(Math.random() * (this.images.length - 1))
         }else{
-            this.$router.push({name: 'HomePage'});
+            this.$route.push({name: 'HomePage'});
         }
 
     }
@@ -198,7 +249,7 @@ button.btn.btn-link {
     font-weight: 600;
 }
 .btn-link-danger{
-    color: red;
+    color: rgb(239, 187, 187);
 }
 .btn-link-danger:hover{
     color: red;

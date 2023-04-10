@@ -8,12 +8,14 @@
             <button  v-on:click="selectCulture()" type="button" class="btn btn-lg btn-outline-primary">Culture</button>
         </div>
     </div>
-    <router-link :to="'/label/'+this.track" class="btn go">
+    <div v-if="this.track">
+        <router-link :to="'/label/'+this.track" class="btn go">
         <span class="go-btn">
             <p class="mt-3">Next</p> 
             <font-awesome-icon class="arrow" icon="fa fa-chevron-right" />
         </span>
     </router-link>
+    </div>
 </template>
 
 <script>
