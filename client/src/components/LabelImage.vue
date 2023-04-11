@@ -5,37 +5,41 @@
     </div>
     <div class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
-            <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav" title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV IMAGE</button>
-            <div class="img-holder"><img :src="this.images[this.index].url" alt="File here"><!-- src updated by JavaScript -->
+            <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
+                title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV
+                IMAGE</button>
+            <div class="img-holder"><img :src="this.images[this.index].url"
+                    alt="File here"><!-- src updated by JavaScript -->
             </div>
-            <button  v-on:click="nextImage()" id="" class="next-image-btn btn btn-link desktop-img-nav btn-lg" title="View the next image">NEXT
+            <button v-on:click="nextImage()" id="" class="next-image-btn btn btn-link desktop-img-nav btn-lg"
+                title="View the next image">NEXT
                 IMAGE<font-awesome-icon class="arrow" icon="fa fa-chevron-right" /></button>
         </div>
         <div class="container px-0 bg-light">
             <div id="edit_image_info">
                 <div class="image-desc">
-                    <p>File: &nbsp;<span id="image_name" title="Open this image on Wikimedia Commons">{{ this.images[this.index].filename }}</span></p>
+                    <p>File: &nbsp;<span id="image_name" title="Open this image on Wikimedia Commons">{{
+                        this.images[this.index].filename }}</span></p>
                     <p>Description: &nbsp;<span id="image_description">{{ this.images[this.index].description }}</span></p>
                     <p>Categories: &nbsp;<span id="image_categories"></span>{{ this.images[this.index].categories }}</p>
                 </div>
             </div>
         </div>
-        <div class="edit-box-header">
-        <div edit-type="depicts" class="edit-publish-btn-group text-right">
-            <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn"
-                title="Cancel your changes">Cancel</button>
-            <button v-on:click="makeContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn"
-                title="Save your edits">Save</button>
+        <div class="edit-box-header pd-5">
+            <div edit-type="depicts" class="edit-publish-btn-group text-right">
+                <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn"
+                    title="Cancel your changes">Cancel</button>
+                <button v-on:click="makeContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn"
+                    title="Save your edits">Save</button>
+            </div>
         </div>
-    </div>
-        <div class="container px-0 bg.light">
-            <div v-if="this.track === 'gender'" class="container edit-box">
+        <div class="container px-1 bg.light edit-box">
+            <div v-if="this.track === 'gender'" class="container">
                 <h5>Gender</h5>
                 <!-- Add gender track here -->
-                <GenderContribution ref="genderContribution" :filename="this.images[this.index].filename"/>
+                <GenderContribution ref="genderContribution" :filename="this.images[this.index].filename" />
             </div>
             <!-- Display for Culture setup -->
-            
             <div v-if="this.track === 'culture'">
                 <h5>Culture</h5>
                 <CultureContribution ref="cultureContribution" />
@@ -58,13 +62,13 @@ import ClothContribution from './ClothContribution';
 
 export default {
     name: 'LabelImage',
-    components:{
+    components: {
         NavBar,
         GenderContribution,
         CultureContribution,
         ClothContribution
     },
-    data(){
+    data() {
         return {
             images: [
                 {
@@ -101,27 +105,27 @@ export default {
     },
 
     methods: {
-        nextImage(){
+        nextImage() {
             this.index++;
-            if(this.index === this.images.length){
+            if (this.index === this.images.length) {
                 this.index = 0;
             }
         },
-        prevImage(){
+        prevImage() {
             this.index--;
             if (this.index === 0) {
                 this.index = this.images.length - 1
             }
         },
-        async sendContribution(contribution){
+        async sendContribution(contribution) {
             let result = await axios.post('http://localhost:8000/contribution', contribution);
-            if(result.data.status == 'success'){
+            if (result.data.status == 'success') {
                 return result.data
             }
             return null
         },
-        async makeContribution(){
-            if(this.track){
+        async makeContribution() {
+            if (this.track) {
                 let contribution = {}
                 contribution.filename = this.images[this.index].filename
                 contribution.track = this.track
@@ -141,34 +145,35 @@ export default {
                 }
                 console.log(contribution)
                 let isSaved = await this.sendContribution(contribution)
-                if(isSaved.status == 'success'){
+                if (isSaved.status == 'success') {
                     this.nextImage()
                     // We need to add flash message here for success
                     this.contribution_saved = true
-                }else{
+                } else {
                     this.contribution_saved = null
                     console.log('saving did not work')
                 }
-            }else{
-                this.$route.push({name: 'HomePage'});
+            } else {
+                this.$route.push({ name: 'HomePage' });
                 alert('please select a track to contribute')
             }
         },
-        cancelContribution(){
-            if(this.track === 'gender'){
+        cancelContribution() {
+            if (this.track === 'gender') {
+                this.$refs.genderContribution.cleaAllFields()
                 this.genderResponse = null
-            }else{
+            } else {
                 console.log('canceling culture')
             }
         }
     },
-    mounted(){
+    mounted() {
         let selectedTrack = this.$route.params.track;
-        if(selectedTrack !== 'null'){
+        if (selectedTrack !== 'null') {
             this.track = this.$route.params.track;
             this.index = Math.floor(Math.random() * (this.images.length - 1))
-        }else{
-            this.$route.push({name: 'HomePage'});
+        } else {
+            this.$route.push({ name: 'HomePage' });
         }
 
     }
@@ -176,23 +181,22 @@ export default {
 </script>
 
 <style>
-
-.image-desc{
+.image-desc {
     margin-left: 50px;
 }
 
-.image-desc p{
+.image-desc p {
     text-align: left;
     margin-left: 20px;
     margin: 5px;
 }
 
-.image-wrapper{
+.image-wrapper {
     display: flex;
     justify-content: space-evenly;
 }
 
-.img-holder{
+.img-holder {
     height: 300px;
     position: relative;
     overflow: hidden;
@@ -231,19 +235,22 @@ button.btn.btn-link {
     vertical-align: middle;
 }
 
-.container.edit-box {
-    margin-top: 10px;
-    padding: 10px;
-    border: solid 1px #a2a9b1;
+.edit-box {
+    margin-top: 2rem;
+    padding: 15px;
+    border: solid 1px #6690da;
     border-radius: 5px;
 }
 
 .edit-box-header {
     position: relative;
+    border-top: solid 1px #13caf0;
+    padding: 1rem;
 }
 
 .edit-publish-btn-group {
     position: absolute;
+    padding: 10px;
     right: 0;
     top: 0;
 }
@@ -251,31 +258,37 @@ button.btn.btn-link {
 .edit-answer-box {
     display: contents;
 }
-.edit-answer-box button{
+
+.edit-answer-box button {
     margin: 20px;
     right: 0;
     left: 0;
     width: 100px;
 }
-.edit-answer-box button:hover{
+
+.edit-answer-box button:hover {
     border-bottom: 1px solid black;
     background-color: rgb(161 177 205);
     font-weight: 600;
 }
-.btn-link-danger{
+
+.btn-link-danger {
     color: rgb(239, 187, 187);
 }
-.btn-link-danger:hover{
+
+.btn-link-danger:hover {
     color: red;
     font-weight: bolder;
 }
-.input-group{
+
+.input-group {
     display: flexbox;
     justify-content: space-between;
     max-width: fit-content;
     padding: 0 10px;
 }
-.question{
+
+.question {
     padding-right: 2rem;
     font-size: larger;
     font-weight: bolder;
@@ -283,12 +296,14 @@ button.btn.btn-link {
     margin-left: 0;
     text-align: left;
 }
-.response{
+
+.response {
     height: 2rem;
     float: right
 }
-.region_alt{
-    margin-left: 20px!important;
+
+.region_alt {
+    margin-left: 20px !important;
     height: max-content;
 }
 </style>
