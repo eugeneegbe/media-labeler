@@ -287,5 +287,8 @@ button.btn.btn-link {
     height: 2rem;
     float: right
 }
-
+.region_alt{
+    margin-left: 20px!important;
+    height: max-content;
+}
 </style>
