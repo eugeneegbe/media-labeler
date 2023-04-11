@@ -9,7 +9,7 @@
                 title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV
                 IMAGE</button>
             <div class="img-holder"><img :src="this.images[this.index].url"
-                    alt="File here"><!-- src updated by JavaScript -->
+                    alt="File here">
             </div>
             <button v-on:click="nextImage()" id="" class="next-image-btn btn btn-link desktop-img-nav btn-lg"
                 title="View the next image">NEXT
