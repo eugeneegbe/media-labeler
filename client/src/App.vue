@@ -21,4 +21,8 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.region_alt{
+    margin-left: 20px!important;
+    height: max-content;
+}
 </style>

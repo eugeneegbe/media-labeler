@@ -25,15 +25,15 @@ function addContribution(contribtion_object){
                 VALUES(@username, @filename, @clarity, @identity_type, @depict_accuracy, @subject_relevance)',
                 {username, filename, clarity, identity_type, depict_accuracy, subject_relevance});
     }else if(track == 'culture'){
-        const {region, familiarity, subject_relevance}  = response
-        feed = db.run('INSERT INTO culture(username, filename, region, familiarity, subject_relevance)\
-                VALUES(@username, @filename, @region, @familiarity, @subject_relevance)',
-                {username, filename, region, familiarity, subject_relevance});
+        const {region, familiarity, region_alt, subject_relevance}  = response
+        feed = db.run('INSERT INTO culture(username, filename, region, familiarity, region_alt, subject_relevance)\
+                VALUES(@username, @filename, @region, @familiarity, @region_alt,  @subject_relevance)',
+                {username, filename, region, familiarity, region_alt,  subject_relevance});
     }else{
-        const {region, accuracy, representation}  = response
-        feed = db.run('INSERT INTO culture(username, filename, region, accuracy, representation)\
-                VALUES(@username, @filename, @region, @accuracy, @representation)',
-                {username, filename, region, accuracy, representation});
+        const {region, accuracy, region_alt, representation}  = response
+        feed = db.run('INSERT INTO cloth(username, filename, region, accuracy, region_alt, representation)\
+                VALUES(@username, @filename, @region, @accuracy, @region_alt, @representation)',
+                {username, filename, region, accuracy, region_alt, representation});
     }
 
     let res = {}

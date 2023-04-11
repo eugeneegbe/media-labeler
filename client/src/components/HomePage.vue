@@ -12,7 +12,7 @@
     <div v-if="this.track">
         <router-link :to="'/label/'+this.track" class="btn go">
         <span class="go-btn">
-            <p class="mt-3">Next</p> 
+            <p class="next">Next</p> 
             <font-awesome-icon class="arrow" icon="fa fa-chevron-right" />
         </span>
     </router-link>
@@ -51,12 +51,17 @@
 .select-track{
     display: inline-block;
     margin-top: 20px;
+    height: 0.5rem;
 }
 .select-track button{
     position: relative;
+    font-size: 30px;
+}
+
+.select-track .next{
     float: left;
     font-size: 50px;
-    margin: 20px;
+    margin-top: 300px;
 }
 .go{
     font-size: 30px;

@@ -61,7 +61,6 @@ export default {
                 { id: 2, name: 'No' },
                 { id: 3, name: 'Not sure' }
             ],
-
             gender_data: {
                 identity_type: '',
                 clarity: '',

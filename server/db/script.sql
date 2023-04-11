@@ -21,6 +21,7 @@ CREATE TABLE culture(
     region text,
     familiarity text,
     subject_relevance text,
+    region_alt text,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
@@ -29,6 +30,7 @@ CREATE TABLE cloth(
     username text,
     filename text NOT NULL,
     region text,
+    region_alt text,
     accuracy text,
     representation text,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL

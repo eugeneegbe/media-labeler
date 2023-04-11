@@ -21,7 +21,6 @@
             </div>
         </div>
         <div class="edit-box-header">
-        <h4>Capture Gender</h4>
         <div edit-type="depicts" class="edit-publish-btn-group text-right">
             <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn"
                 title="Cancel your changes">Cancel</button>
@@ -31,11 +30,21 @@
     </div>
         <div class="container px-0 bg.light">
             <div v-if="this.track === 'gender'" class="container edit-box">
+                <h5>Gender</h5>
                 <!-- Add gender track here -->
                 <GenderContribution ref="genderContribution" :filename="this.images[this.index].filename"/>
             </div>
             <!-- Display for Culture setup -->
-            <p v-if="this.track === 'culture'"> Looking at Culture</p>
+            
+            <div v-if="this.track === 'culture'">
+                <h5>Culture</h5>
+                <CultureContribution ref="cultureContribution" />
+            </div>
+            <!-- Display for Culture setup -->
+            <div v-if="this.track === 'cloth'">
+                <h5>Clothing/Dress</h5>
+                <ClothContribution ref="clothContribution" />
+            </div>
         </div>
     </div>
 </template>
@@ -44,12 +53,16 @@
 import NavBar from './NavBar';
 import axios from 'axios';
 import GenderContribution from './GenderContribution';
+import CultureContribution from './CultureContribution';
+import ClothContribution from './ClothContribution';
 
 export default {
     name: 'LabelImage',
     components:{
         NavBar,
-        GenderContribution
+        GenderContribution,
+        CultureContribution,
+        ClothContribution
     },
     data(){
         return {
@@ -93,7 +106,6 @@ export default {
             if(this.index === this.images.length){
                 this.index = 0;
             }
-            this.forceToReload()
         },
         prevImage(){
             this.index--;
@@ -119,15 +131,16 @@ export default {
                         contribution.response = this.$refs.genderContribution.gender_data
                         break;
                     case 'culture':
+                        contribution.response = this.$refs.cultureContribution.culture_data
                         break;
                     case 'cloth':
+                        contribution.response = this.$refs.clothContribution.clothing_data
                         break;
                     default:
                         break;
                 }
-
+                console.log(contribution)
                 let isSaved = await this.sendContribution(contribution)
-                console.log('isSaved', isSaved)
                 if(isSaved.status == 'success'){
                     this.nextImage()
                     // We need to add flash message here for success
@@ -274,4 +287,5 @@ button.btn.btn-link {
     height: 2rem;
     float: right
 }
+
 </style>
