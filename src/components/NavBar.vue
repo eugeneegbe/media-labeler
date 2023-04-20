@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 export default {
     name: "NavBar",
     data() {
@@ -36,7 +37,22 @@ export default {
         };
     },
     methods: {
-        logout() { }
+        async login() {
+            const response = await fetch('https://comelab-server.toolforge.org/login', {
+            method: 'GET',
+                headers: {
+                    'accept': 'application/json',
+                   'Access-Control-Allow-Origin': '*'
+                },
+            });
+            if (!response.ok) {
+            throw new Error(`Error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log(result)
+        }
+        
     }
 }
 </script>

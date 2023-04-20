@@ -25,3 +25,5 @@ client/pnpm-debug.log*
 /server/node_modules
 
 /server/db/labeler.db
+node_modules
+dist
