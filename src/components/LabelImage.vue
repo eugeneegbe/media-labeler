@@ -60,6 +60,8 @@ import GenderContribution from './GenderContribution';
 import CultureContribution from './CultureContribution';
 import ClothContribution from './ClothContribution';
 
+const base_url = 'https://comelab-server.toolforge.org/';
+
 export default {
     name: 'LabelImage',
     components: {
@@ -118,8 +120,9 @@ export default {
             }
         },
         async sendContribution(contribution) {
-            let result = await axios.post('http://localhost:8000/contribution', contribution);
-            if (result.data.status == 'success') {
+            console.log(contribution)
+            let result = await axios.post(base_url + '/contributions', contribution);
+            if (result == 'success') {
                 return result.data
             }
             return null

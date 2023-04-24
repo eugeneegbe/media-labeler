@@ -16,8 +16,8 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li v-if="!username" class="nav-item ">
-                    <a class="nav-link log-btn" @click="login">Login</a>
+                <li v-if="!username" class="nav-item">
+                    <a class="nav-link log-btn" @click="login" href="https://comelab-server.toolforge.org/login">Login</a>
                 </li>
                 <li v-else class="nav-item ">
                     <a class="nav-link log-btn" @click="logout">Logout</a>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     name: "NavBar",
@@ -37,22 +38,26 @@ export default {
         };
     },
     methods: {
+        logout() {
+            console.log('log out')
+            this.username = null
+        },
         async login() {
-            const response = await fetch('https://comelab-server.toolforge.org/login', {
-            method: 'GET',
+            console.log('mounted')
+            const response = await axios.get('https://comelab-server.toolforge.org/current-user', {
+                method: 'GET',
                 headers: {
                     'accept': 'application/json',
-                   'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': '*'
                 },
             });
-            if (!response.ok) {
-            throw new Error(`Error! status: ${response.status}`);
+            console.log(response)
+            if (response.ok) {
+                this.username = response.data.username
             }
-
-            const result = await response.json();
-            console.log(result)
         }
-        
+    },
+    async mounted(){
     }
 }
 </script>
