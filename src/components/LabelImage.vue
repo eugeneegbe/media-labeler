@@ -149,10 +149,10 @@ export default {
                     break;
 
                 case 'culture':
-                    this.$refs.cultureContribution.culture_data.clearAllData();
+                    this.$refs.cultureContribution.clearAllData();
                     break;
                 case 'cloth':
-                    this.$refs.clothContribution.clothing_data.clearAllData();
+                    this.$refs.clothContribution.clearAllData();
                     break;
                 default:
                     break;
@@ -161,8 +161,6 @@ export default {
         async sendContribution() {
             const contribution = this.makeContribution()
             let result = await axios.post(base_test_url + '/contributions', contribution);
-
-                console.log('isSaved', result)
                 if (result.data == 'success') {
                     this.nextImage()
                     // We need to add flash message here for success
