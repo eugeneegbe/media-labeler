@@ -1,8 +1,5 @@
 <template>
     <NavBar />
-    <div v-if="this.contribution_saved" class="alert alert-success" role="alert">
-        Contribution successful!
-    </div>
     <div class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
@@ -29,7 +26,7 @@
             <div edit-type="depicts" class="edit-publish-btn-group text-right">
                 <button v-on:click="cancelContribution" class="btn btn-sm btn-link  btn-link-danger cancel-edits-btn"
                     title="Cancel your changes">Cancel</button>
-                <button v-on:click="makeContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn"
+                <button v-on:click="sendContribution" type="submit" class="btn btn-sm btn-primary publish-edits-btn"
                     title="Save your edits">Save</button>
             </div>
         </div>
@@ -60,7 +57,8 @@ import GenderContribution from './GenderContribution';
 import CultureContribution from './CultureContribution';
 import ClothContribution from './ClothContribution';
 
-const base_url = 'https://comelab-server.toolforge.org/';
+// const base_url = 'https://comelab-server.toolforge.org/';
+const base_test_url = 'http://127.0.0.1:5000/'
 
 export default {
     name: 'LabelImage',
@@ -119,15 +117,7 @@ export default {
                 this.index = this.images.length - 1
             }
         },
-        async sendContribution(contribution) {
-            console.log(contribution)
-            let result = await axios.post(base_url + '/contributions', contribution);
-            if (result == 'success') {
-                return result.data
-            }
-            return null
-        },
-        async makeContribution() {
+        makeContribution() {
             if (this.track) {
                 let contribution = {}
                 contribution.filename = this.images[this.index].filename
@@ -146,20 +136,25 @@ export default {
                     default:
                         break;
                 }
-                console.log(contribution)
-                let isSaved = await this.sendContribution(contribution)
-                if (isSaved.status == 'success') {
-                    this.nextImage()
-                    // We need to add flash message here for success
-                    this.contribution_saved = true
-                } else {
-                    this.contribution_saved = null
-                    console.log('saving did not work')
-                }
+                return contribution
             } else {
                 this.$route.push({ name: 'HomePage' });
                 alert('please select a track to contribute')
             }
+        },
+        async sendContribution() {
+            const contribution = this.makeContribution()
+            let result = await axios.post(base_test_url + '/contributions', contribution);
+
+                console.log('isSaved', result)
+                if (result.data == 'success') {
+                    this.nextImage()
+                    // We need to add flash message here for success
+                    this.contribution_saved = true
+                } else {
+                    this.contribution_saved = false
+                    console.log('saving did not work')
+                }
         },
         cancelContribution() {
             if (this.track === 'gender') {
