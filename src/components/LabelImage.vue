@@ -142,6 +142,22 @@ export default {
                 alert('please select a track to contribute')
             }
         },
+        clearAnswerField(track){
+            switch(track){
+                case 'gender':
+                    this.$refs.genderContribution.clearAllData();
+                    break;
+
+                case 'culture':
+                    this.$refs.cultureContribution.culture_data.clearAllData();
+                    break;
+                case 'cloth':
+                    this.$refs.clothContribution.clothing_data.clearAllData();
+                    break;
+                default:
+                    break;
+            }
+        },
         async sendContribution() {
             const contribution = this.makeContribution()
             let result = await axios.post(base_test_url + '/contributions', contribution);
@@ -151,19 +167,14 @@ export default {
                     this.nextImage()
                     // We need to add flash message here for success
                     this.contribution_saved = true
-                    this.$refs.genderContribution.clearAllData()
+                   this.clearAnswerField(this.track)
                 } else {
                     this.contribution_saved = false
                     console.log('saving did not work')
                 }
         },
         cancelContribution() {
-            if (this.track === 'gender') {
-                this.$refs.genderContribution.clearAllData()
-                this.genderResponse = null
-            } else {
-                console.log('canceling culture')
-            }
+            this.clearAnswerField(this.track)
         }
     },
     mounted() {
