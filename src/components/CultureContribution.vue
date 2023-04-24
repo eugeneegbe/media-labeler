@@ -67,7 +67,19 @@ export default {
             }
         }
     },
-    methods: {},
+    methods: {
+        initialState(){
+            return {
+                region: '',
+                familiarity: '',
+                subject_relevance: '',
+                region_alt: '',
+            }
+        },
+        clearAllData() {
+            Object.assign(this.$data.culture_data, this.initialState());
+        }
+    },
     mounted() {
         // we have to fetch the file name from props and make a request to get data
         console.log(this.filename)

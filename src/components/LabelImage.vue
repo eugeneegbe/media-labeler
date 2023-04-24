@@ -151,6 +151,7 @@ export default {
                     this.nextImage()
                     // We need to add flash message here for success
                     this.contribution_saved = true
+                    this.$refs.genderContribution.clearAllData()
                 } else {
                     this.contribution_saved = false
                     console.log('saving did not work')
@@ -158,7 +159,7 @@ export default {
         },
         cancelContribution() {
             if (this.track === 'gender') {
-                this.$refs.genderContribution.cleaAllFields()
+                this.$refs.genderContribution.clearAllData()
                 this.genderResponse = null
             } else {
                 console.log('canceling culture')

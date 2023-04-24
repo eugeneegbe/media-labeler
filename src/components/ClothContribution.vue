@@ -62,7 +62,19 @@ export default {
             }
         }
     },
-    methods: {},
+    methods: {
+        initialState(){
+            return {
+                region: '',
+                region_alt: '',
+                accuracy: '',
+                representation: ''
+            }
+        },
+        clearAllData() {
+            Object.assign(this.$data.clothing_data, this.initialState());
+        }
+    },
     mounted() {
 
     }

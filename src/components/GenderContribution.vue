@@ -69,7 +69,19 @@ export default {
             }
         }
     },
-    methods: {},
+    methods: {
+        initialState(){
+            return {
+                identity_type: '',
+                clarity: '',
+                depict_accuracy: '',
+                subject_relevance: ''
+            }
+        },
+        clearAllData() {
+            Object.assign(this.$data.gender_data, this.initialState());
+        }
+    },
     mounted() {
         // we have to fetch the file name from props and make a request to get data
         console.log(this.filename)
