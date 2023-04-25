@@ -57,8 +57,7 @@ import GenderContribution from './GenderContribution';
 import CultureContribution from './CultureContribution';
 import ClothContribution from './ClothContribution';
 
-// const base_url = 'https://comelab-server.toolforge.org/';
-const base_test_url = 'http://127.0.0.1:5000/'
+const base_url = 'http://127.0.0.1:5000/';
 
 export default {
     name: 'LabelImage',
@@ -160,7 +159,7 @@ export default {
         },
         async sendContribution() {
             const contribution = this.makeContribution()
-            let result = await axios.post(base_test_url + '/contributions', contribution);
+            let result = await axios.post(base_url + '/contributions', contribution);
                 if (result.data == 'success') {
                     this.nextImage()
                     // We need to add flash message here for success

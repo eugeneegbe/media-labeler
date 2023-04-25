@@ -14,6 +14,9 @@
                 <li v-if="username" class="nav-item">
                     <router-link class="nav-link logout-btn" :to="'/label'">Contribute</router-link>
                 </li>
+                <li class="nav-item">
+                    <router-link class="nav-link logout-btn" :to="'/add-images'">Add Images</router-link>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li v-if="!username" class="nav-item">
