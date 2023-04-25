@@ -28,6 +28,7 @@
     import NavBar from './NavBar';
     import axios from 'axios';
     const base_url = 'https://comelab-server.toolforge.org/';
+    // const base_url = 'http://localhost:5000/'
 
     export default{
         name: 'AddImage',
@@ -40,10 +41,10 @@
                 message: null,
                 selected_category_type: null,
                 category_types_options: [
-                { id: 1, name: 'gender' },
-                { id: 2, name: 'food' },
-                { id: 3, name: 'culture' }
-            ]
+                    { id: 1, name: 'gender' },
+                    { id: 2, name: 'food' },
+                    { id: 3, name: 'culture' }
+                ]
             }
         },
         methods: {
@@ -54,7 +55,9 @@
                 })
                 .then(
                     function(response){
-                        if (response.status == 'success' ) {
+                        if (response.status == 200 ) {
+                            this.clearAllData();
+                            alert('Category has been added');
                             this.$route.push({ name: 'HomePage' });
                         }
                     }
@@ -65,6 +68,16 @@
                         alert(response.message)
                     }
                 });
+            },
+            initialState(){
+                return {
+                    category: null,
+                    message: null,
+                    selected_category_type: null
+                }
+            },
+            clearAllData() {
+                Object.assign(this.$data.gender_data, this.initialState());
             }
         },
         setMessage(message){
