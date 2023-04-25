@@ -5,8 +5,7 @@
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
                 title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV
                 IMAGE</button>
-            <div class="img-holder"><img :src="this.images[this.index].url"
-                    alt="File here">
+            <div class="img-holder"><img :src="this.images[this.index].url" alt="File here">
             </div>
             <button v-on:click="nextImage()" id="" class="next-image-btn btn btn-link desktop-img-nav btn-lg"
                 title="View the next image">NEXT
@@ -15,10 +14,9 @@
         <div class="container px-0 bg-light">
             <div id="edit_image_info">
                 <div class="image-desc">
-                    <p>File: &nbsp;<span id="image_name" title="Open this image on Wikimedia Commons">{{
-                        this.images[this.index].filename }}</span></p>
-                    <p>Description: &nbsp;<span id="image_description">{{ this.images[this.index].description }}</span></p>
-                    <p>Categories: &nbsp;<span id="image_categories"></span>{{ this.images[this.index].categories }}</p>
+                    <p><span id="image_name" title="Open this image on Wikimedia Commons">{{this.images[this.index].filename }}</span></p>
+                    <p>Categorie: &nbsp;<span id="image_categories"></span>{{ this.selected_category }}</p>
+                    <p>Full Link: &nbsp;<span id="image_link"><a :href="this.images[this.index].description_url">View on Wikimedia Commons</a></span></p>
                 </div>
             </div>
         </div>
@@ -70,35 +68,15 @@ export default {
     data() {
         return {
             images: [
-                {
-                    url: "https://upload.wikimedia.org/wikipedia/commons/8/83/OldSanJuan_House_Red.JPG",
-                    filename: "OldSanJuan House Red.JPG",
-                    description: "Detail of colonial house.",
-                    categories: " Buildings in Old San Juan, Puerto Rico | Colonial Buildings"
-                },
-                {
-                    url: "https://upload.wikimedia.org/wikipedia/commons/5/56/BASA-3K-7-355-135-Cultural_review_of_the_nations_in_Hamburg%2C_1936.jpg",
-                    filename: "BASA-3K-7-355-135-Cultural review of the nations in Hamburg, 1936.jpg",
-                    description: "Views and photos from an international congress (cultural review of the nations in Hamburg, 1936). Bulgaria",
-                    categories: " Hamburgh | Nexting"
-                },
-                {
-                    url: "https://upload.wikimedia.org/wikipedia/commons/0/00/BASA-2072K-1-373-19-Kukeri_from_Bulgaria.JPG",
-                    filename: "BASA-2072K-1-373-19-Kukeri from Bulgaria.JPG",
-                    description: "Kukeri from Bulgaria.",
-                    categories: "Bulgaria | Kukeri"
-                },
-                {
-                    url: "https://upload.wikimedia.org/wikipedia/commons/4/43/BASA-1771K-1-1149-1-Aleko_Konstantinov.jpeg",
-                    filename: "BASA-1771K-1-1149-1-Aleko Konstantinov.jpeg",
-                    description: "Aleko Konstantinov.",
-                    categories: "Aleko | Konstantinov."
-                }
+            {
+                url: "",
+                filename: "",
+                descriptionurl: "descriptionurl",
+            }
             ],
             index: 0,
             track: '',
-            genderResponse: {},
-            cultureResponse: {},
+            selected_category: '',
             contribution_saved: null
         }
     },
@@ -164,7 +142,8 @@ export default {
                     this.nextImage()
                     // We need to add flash message here for success
                     this.contribution_saved = true
-                   this.clearAnswerField(this.track)
+                    alert('contribution was saved')
+                    this.clearAnswerField(this.track)
                 } else {
                     this.contribution_saved = false
                     console.log('saving did not work')
@@ -172,12 +151,26 @@ export default {
         },
         cancelContribution() {
             this.clearAnswerField(this.track)
-        }
+        },
+        async fetchImages(){
+                let response = await axios.get(base_url + '/images');
+                if (response.status == 200) {
+                    this.images = response.data
+                } else {
+                    this.$route.push({ name: 'HomePage' });
+                    console.log('could not fetch images')
+                }
+            }
     },
     mounted() {
+
         let selectedTrack = this.$route.params.track;
-        if (selectedTrack !== 'null') {
+        let selectedCategory = this.$route.params.category
+        console.log(selectedTrack, selectedCategory)
+        if (selectedTrack !== 'null' && selectedCategory !== 'null' ) {
+            this.fetchImages();
             this.track = this.$route.params.track;
+            this.selected_category = this.$route.params.category;
             this.index = Math.floor(Math.random() * (this.images.length - 1))
         } else {
             this.$route.push({ name: 'HomePage' });

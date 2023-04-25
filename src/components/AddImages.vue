@@ -2,12 +2,22 @@
     <NavBar />
     <p v-bind="this.message" hidden="{this.message}" class="alert alert-info" >{this.message}</p>
     <div class="container text-center  mt-5 mb-5">
-        <h1 class="mb-4 ">Enter a Wikimedia Commons Category</h1>
-        <div class="bb-4 category-text">
-            <input class="" v-model="this.category" type="text" placeholder="Category:African Foods" />
-        </div>
+        <span>
+            <h5 style="float:left">Enter a Wikimedia Commons Category </h5>
+            <h5 style="">Select a type</h5>
+        </span>
+        <span>
+            <div class="bb-4 category-text">
+                <input class="" v-model="this.category" type="text" placeholder="Category:African Foods" />
+                <select v-model="this.selected_category_type" class="cat-type">
+                <option v-for="option in this.category_types_options" v-bind:value="option.name" v-bind:key="option.id">
+                    {{ option.name }}
+                    </option>
+                </select>
+            </div>
+        </span>
     </div>
-    <div class="">  
+    <div class="">
         <span class="go-btn go">
             <button v-on:click="saveImages()" type="button" class="btn btn-lg btn-outline-dark mr-5">Save</button>
         </span>
@@ -27,12 +37,21 @@
         data(){
             return{
                 category: null,
-                message: null
+                message: null,
+                selected_category_type: null,
+                category_types_options: [
+                { id: 1, name: 'gender' },
+                { id: 2, name: 'food' },
+                { id: 3, name: 'culture' }
+            ]
             }
         },
         methods: {
             saveImages(){
-                axios.post(base_url + '/categories/add', {'category': this.category})
+                axios.post(base_url + '/categories/add',{
+                    'category': this.category,
+                    'type': this.selected_category_type
+                })
                 .then(
                     function(response){
                         if (response.status == 'success' ) {
@@ -60,6 +79,7 @@
 .category-text input{
     width: 500px;
     line-height: 2rem;
+    float: left;
 }
 
 .arrow{
@@ -89,5 +109,7 @@
 }
 .go{
     font-size: 30px;
+    position: relative;
+    right: 3rem;
 }
 </style>
