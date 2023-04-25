@@ -31,7 +31,7 @@
     import NavBar from './NavBar';
     import axios from 'axios';
 
-    const base_url = 'http://127.0.0.1:5000/';
+    const base_url = 'https://comelab-server.toolforge.org/';
 
     export default{
         name: 'HomePage',

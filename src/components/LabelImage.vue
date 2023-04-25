@@ -55,7 +55,7 @@ import GenderContribution from './GenderContribution';
 import CultureContribution from './CultureContribution';
 import ClothContribution from './ClothContribution';
 
-const base_url = 'http://127.0.0.1:5000/';
+const base_url = 'https://comelab-server.toolforge.org/';
 
 export default {
     name: 'LabelImage',
