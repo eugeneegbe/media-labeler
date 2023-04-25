@@ -27,3 +27,5 @@ client/pnpm-debug.log*
 /server/db/labeler.db
 node_modules
 dist
+.env
+.env.production
