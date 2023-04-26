@@ -1,30 +1,35 @@
 <template>
     <NavBar />
-    <h2> All registered ontributions</h2>
-    <hr>
-    <br>
-
-    <div class="container text-center  mt-5">
-        <table id="productsTable" class="table table-bordered mt-4">
-            <thead>
-                <tr>
-                    <td>No</td>
-                    <td>User</td>
-                    <td>Type</td>
-                    <td>Filename</td>
-                    <td>Date</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="contribution in contributions" :key="contribution.id">
-                    <td>{{contribution.id}}</td>
-                    <td>{{contribution.username}}</td>
-                    <td>{{contribution.type}}</td>
-                    <td>{{contribution.filename}}</td>
-                    <td>{{contribution.created_at}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div v-if="this.contributions.length > 1">
+        <h2> All registered contributions</h2>
+        <hr>
+        <br>
+        <a class="download btn btn-primary btn-md mt-3 mb-2"> Download </a>
+        <div class="container text-center  mt-5">
+            <table id="productsTable" class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <td>No</td>
+                        <td>User</td>
+                        <td>Type</td>
+                        <td>Filename</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="contribution in contributions" :key="contribution.id">
+                        <td>{{contribution.id}}</td>
+                        <td>{{contribution.username}}</td>
+                        <td>{{contribution.type}}</td>
+                        <td>{{contribution.filename}}</td>
+                        <td>{{contribution.created_at}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div v-else>
+        <h2>There are no contributions avaible</h2>
     </div>
 </template>
 
@@ -76,41 +81,9 @@
 </script>
 
 <style>
-.category-text input{
-    width: 500px;
-    line-height: 2rem;
-    float: left;
-}
-
-.arrow{
-    font-size:  40px;
-    margin-top: 10px;
-}
-.next{
-    float: left;
-    font-size: 40px;
-    margin-top: 300px;
-}
-
-.go:hover{
-    border-bottom: 1px solid black;
-    cursor: pointer;
-}
-
-.go-btn{
-    margin: auto;
-    display: inline-flex;
-    
-}
-
-.go-btn p{
-    margin-top: 0rem!important;
-    margin-right: 10px!important;
-}
-.go{
-    font-size: 30px;
-    position: relative;
-    right: 3rem;
+.download{
+    float: right;
+    margin-right: 4.5rem;
 }
 
 </style>
