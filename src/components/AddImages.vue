@@ -22,12 +22,32 @@
             <button v-on:click="saveImages()" type="button" class="btn btn-lg btn-outline-dark mr-5">Save</button>
         </span>
     </div>
+    <div class="container text-center  mb-5">
+        <table id="productsTable" class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Name</td>
+                    <td>Type</td>
+                    <span><p>Action</p></span>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="category in categories" :key="category.id">
+                    <td>{{category.id}}</td>
+                    <td>{{category.name}}</td>
+                    <td>{{category.type}}</td>
+                    <button class="btn" v-on:click="this.deleteCategory()">Delete</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>
     import NavBar from './NavBar';
     import axios from 'axios';
-    const base_url = 'https://comelab-server.toolforge.org/';
+    const base_url = 'https://comelab-server.toolforge.org';
     // const base_url = 'http://localhost:5000/'
 
     export default{
@@ -44,7 +64,12 @@
                     { id: 1, name: 'gender' },
                     { id: 2, name: 'culture' },
                     { id: 3, name: 'cloth' }
-                ]
+                ],
+                categories: [{
+                    id: '',
+                    name: '',
+                    type: ''
+                }]
             }
         },
         methods: {
@@ -67,12 +92,25 @@
                         alert(response.message)
                     }
                 });
+            },
+            setMessage(message){
+                this.message = message
+            },
+            async fetchCategories(){
+                    let response = await axios.get(base_url + '/categories');
+                    if (response.status == 200) {
+                        this.categories = response.data
+                    } else {
+                        this.$route.push({ name: 'HomePage' });
+                        console.log('could not fetch categories')
+                    }
+                },
+            deleteCategory(){
+
             }
         },
-        setMessage(message){
-            this.message = message
-        },
         mounted(){
+            this.fetchCategories();
         }
     }
 </script>
@@ -114,4 +152,5 @@
     position: relative;
     right: 3rem;
 }
+
 </style>
