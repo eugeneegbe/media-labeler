@@ -21,7 +21,7 @@
         </span>
     </div>
     <br>
-    <div class="container text-center  mt-5">
+    <div v-if="this.categories.length > 1" class="container text-center  mt-5">
         <h2>Below are the categories which have been added</h2>
         <br>
         <table id="productsTable" class="table table-bordered mt-4">

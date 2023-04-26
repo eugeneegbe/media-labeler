@@ -3,13 +3,13 @@
     <div v-if="this.images.length > 1" class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
-                title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV
+                title="View the previous image"><font-awesome-icon class="arrow-icon" icon="fa fa-chevron-left" />PREV
                 IMAGE</button>
             <div class="img-holder"><img :src="this.images[this.index].url" alt="File here">
             </div>
-            <button v-on:click="nextImage()" id="" class="next-image-btn btn btn-link desktop-img-nav btn-lg"
+            <button v-on:click="nextImage()" id="" class=" next-image-btn btn btn-link desktop-img-nav btn-lg"
                 title="View the next image">NEXT
-                IMAGE<font-awesome-icon class="arrow" icon="fa fa-chevron-right" /></button>
+                IMAGE<font-awesome-icon class="arrow-icon" icon="fa fa-chevron-right" /></button>
         </div>
         <div class="container px-0 bg-light">
             <div id="edit_image_info">
@@ -235,9 +235,11 @@ button.btn.btn-link {
     font-weight: bold;
 }
 
-.arrow {
-    font-size: 3rem;
+.arrow-icon {
+    font-size: 3.5rem;
     vertical-align: middle;
+    margin-top: 0rem;
+
 }
 
 .edit-box {
