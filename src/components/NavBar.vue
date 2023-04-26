@@ -19,10 +19,10 @@
                 </li> -->
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
+                <li v-if="username == 'Anonymous'" class="nav-item">
                     <a class="nav-link log-btn" @click="login" href="https://comelab-server.toolforge.org/login">Login</a>
                 </li>
-                <li v-if="username !== 'Anonymous'" class="nav-item ">
+                <li v-else class="nav-item ">
                     <a class="nav-link log-btn" @click="logout">Logout</a>
                 </li>
                 <li class="username">

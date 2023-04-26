@@ -103,7 +103,7 @@ export default {
                 let contribution = {}
                 contribution.filename = this.images[this.index].filename
                 contribution.track = this.track
-                contribution.username = this.current_user
+                contribution.username = this.$refs.navBar.username
                 switch (this.track) {
                     case 'gender':
                         contribution.response = this.$refs.genderContribution.gender_data
