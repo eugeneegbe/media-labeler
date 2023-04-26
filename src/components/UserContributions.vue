@@ -1,8 +1,10 @@
 <template>
     <NavBar />
-    <h2> All Contributions Registered</h2>
+    <h2> All registered ontributions</h2>
     <hr>
-    <div class="container text-center  mb-5">
+    <br>
+
+    <div class="container text-center  mt-5">
         <table id="productsTable" class="table table-bordered mt-4">
             <thead>
                 <tr>
