@@ -4,7 +4,7 @@
         <h2> All registered contributions</h2>
         <hr>
         <br>
-        <a class="download btn btn-primary btn-md mt-3 mb-2"> Download </a>
+        <a class="download btn btn-primary btn-md mt-3 mb-2" :href="'https://comelab-server.toolforge.org/contributions/download'"> Download </a>
         <div class="container text-center  mt-5">
             <table id="productsTable" class="table table-bordered mt-4">
                 <thead>
