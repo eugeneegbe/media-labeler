@@ -1,6 +1,6 @@
 <template>
     <NavBar />
-    <div class="container text-center  mt-3 mb-3">
+    <div v-if="this.images.length > 0" class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
                 title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV
@@ -45,6 +45,9 @@
                 <ClothContribution ref="clothContribution" />
             </div>
         </div>
+    </div>
+    <div v-else class="">
+        <h2> There are no images in this category</h2>
     </div>
 </template>
 
@@ -153,7 +156,7 @@ export default {
             this.clearAnswerField(this.track)
         },
         async fetchImages(){
-                let response = await axios.get(base_url + '/images');
+                let response = await axios.get(base_url + '/images?category=' + this.selected_category);
                 if (response.status == 200) {
                     this.images = response.data
                 } else {
@@ -168,9 +171,9 @@ export default {
         let selectedCategory = this.$route.params.category
         console.log(selectedTrack, selectedCategory)
         if (selectedTrack !== 'null' && selectedCategory !== 'null' ) {
-            this.fetchImages();
             this.track = this.$route.params.track;
             this.selected_category = this.$route.params.category;
+            this.fetchImages();
             this.index = Math.floor(Math.random() * (this.images.length - 1))
         } else {
             this.$route.push({ name: 'HomePage' });
