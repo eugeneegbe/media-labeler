@@ -1,6 +1,8 @@
 import HomePage from './components/HomePage.vue'
 import LabelImage from './components/LabelImage.vue'
 import AddImages from './components/AddImages.vue'
+import UserContributions from './components/UserContributions.vue'
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -18,6 +20,11 @@ const routes = [
         name: 'LabelImage',
         component: LabelImage,
         path: '/label/:track/:category/:username'
+    },
+    {
+        name: 'UserContributions',
+        component: UserContributions,
+        path: '/contributions'
     }
 ]
 

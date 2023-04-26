@@ -11,8 +11,8 @@
                 <li class="nav-item">
                     <router-link class="nav-link logout-btn" :to="'/'">Home</router-link>
                 </li>
-                <li v-if="username !== 'Anonymous'" class="nav-item">
-                    <router-link class="nav-link logout-btn" :to="'/label'">Contribute</router-link>
+                <li class="nav-item">
+                    <router-link class="nav-link logout-btn" :to="'/contributions'">Contributions</router-link>
                 </li>
                 <!-- <li class="nav-item">
                     <router-link class="nav-link logout-btn" :to="'/add-images'">Add Images</router-link>
