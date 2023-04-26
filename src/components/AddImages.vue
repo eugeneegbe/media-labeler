@@ -1,7 +1,7 @@
 <template>
     <NavBar />
     <p v-bind="this.message" hidden="{this.message}" class="alert alert-info" >{this.message}</p>
-    <div class="container text-center  mt-5 mb-5">
+    <div class="container text-center  ">
         <span>
             <h5 style="float:left">Enter a Wikimedia Commons Category </h5>
             <h5 style="">Select a type</h5>
@@ -14,15 +14,16 @@
                     {{ option.name }}
                     </option>
                 </select>
+                <span class="ml-3 go-btn go">
+                    <button v-on:click="saveImages()" type="button" class="btn btn-lg btn-outline-dark mr-5">Save</button>
+                </span>
             </div>
         </span>
     </div>
-    <div class="">
-        <span class="go-btn go">
-            <button v-on:click="saveImages()" type="button" class="btn btn-lg btn-outline-dark mr-5">Save</button>
-        </span>
-    </div>
-    <div class="container text-center  mb-5">
+    <br>
+    <div class="container text-center  mt-5">
+        <h2>Below are the categories which have been added</h2>
+        <br>
         <table id="productsTable" class="table table-bordered mt-4">
             <thead>
                 <tr>
@@ -120,6 +121,7 @@
     width: 500px;
     line-height: 2rem;
     float: left;
+    margin-top: 0.5rem;
 }
 
 .arrow{
@@ -138,7 +140,7 @@
 }
 
 .go-btn{
-    margin: auto;
+    margin-left: 4.5rem;
     display: inline-flex;
     
 }
@@ -148,9 +150,8 @@
     margin-right: 10px!important;
 }
 .go{
-    font-size: 30px;
+    font-size: 4rem !important;
     position: relative;
-    right: 3rem;
 }
 
 </style>
