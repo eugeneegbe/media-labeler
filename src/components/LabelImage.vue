@@ -1,6 +1,6 @@
 <template>
-    <NavBar />
-    <div v-if="this.images.length > 0" class="container text-center  mt-3 mb-3">
+    <NavBar ref="navBar"/>
+    <div v-if="this.images.length > 1" class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
                 title="View the previous image"><font-awesome-icon class="arrow" icon="fa fa-chevron-left" />PREV
@@ -80,7 +80,8 @@ export default {
             index: 0,
             track: '',
             selected_category: '',
-            contribution_saved: null
+            contribution_saved: null,
+            current_user: 'Anonymous'
         }
     },
 
@@ -102,7 +103,7 @@ export default {
                 let contribution = {}
                 contribution.filename = this.images[this.index].filename
                 contribution.track = this.track
-                contribution.username = 'Eugene233'
+                contribution.username = this.current_user
                 switch (this.track) {
                     case 'gender':
                         contribution.response = this.$refs.genderContribution.gender_data
@@ -166,12 +167,13 @@ export default {
             }
     },
     mounted() {
-
+        
         let selectedTrack = this.$route.params.track;
         let selectedCategory = this.$route.params.category
-        console.log(selectedTrack, selectedCategory)
         if (selectedTrack !== 'null' && selectedCategory !== 'null' ) {
             this.track = this.$route.params.track;
+            this.current_user = this.$route.params.username
+            this.$refs.navBar.username = this.current_user
             this.selected_category = this.$route.params.category;
             this.fetchImages();
             this.index = Math.floor(Math.random() * (this.images.length - 1))

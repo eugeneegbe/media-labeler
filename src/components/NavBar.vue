@@ -11,7 +11,7 @@
                 <li class="nav-item">
                     <router-link class="nav-link logout-btn" :to="'/'">Home</router-link>
                 </li>
-                <li v-if="username" class="nav-item">
+                <li v-if="username !== 'Anonymous'" class="nav-item">
                     <router-link class="nav-link logout-btn" :to="'/label'">Contribute</router-link>
                 </li>
                 <!-- <li class="nav-item">
@@ -19,11 +19,14 @@
                 </li> -->
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li v-if="!username" class="nav-item">
+                <li v-if="username !== 'Anonymous'" class="nav-item">
                     <a class="nav-link log-btn" @click="login" href="https://comelab-server.toolforge.org/login">Login</a>
                 </li>
                 <li v-else class="nav-item ">
                     <a class="nav-link log-btn" @click="logout">Logout</a>
+                </li>
+                <li class="username">
+                    <a class="nav-link log-btn">{{ this.username }}</a>
                 </li>
             </ul>
         </div>
@@ -31,36 +34,22 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 
 export default {
     name: "NavBar",
     data() {
         return {
-            username: null
+            username: 'Anonymous'
         };
     },
     methods: {
         logout() {
             console.log('log out')
-            this.username = null
+            this.username = 'Anonymous'
         },
-        async login() {
-            console.log('mounted')
-            const response = await axios.get('https://comelab-server.toolforge.org/current-user', {
-                method: 'GET',
-                headers: {
-                    'accept': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                },
-            });
-            console.log(response)
-            if (response.ok) {
-                this.username = response.data.username
-            }
-        }
     },
-    async mounted(){
+    mounted(){
     }
 }
 </script>
@@ -87,5 +76,9 @@ export default {
 
 .log-btn {
     cursor: pointer;
+}
+.username {
+    text-decoration: none;
+    font-size: larger;
 }
 </style>

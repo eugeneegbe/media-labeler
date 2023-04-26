@@ -1,5 +1,5 @@
 <template>
-    <NavBar />
+    <NavBar ref="navBar"/>
     <div class="container text-center  mt-5 mb-5">
         <h1 class="mb-4 ">Hi, Welcome to the Commons Labeler Tool</h1>
         <h4 class="mb-4 ">Select track</h4>
@@ -19,7 +19,7 @@
             </select>
         </div>
         <br/>
-        <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category" class="btn go">
+        <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category + '/' + this.current_user" class="btn go">
         <span class="go-btn">
             <button class="btn btn-md btn-primary">Next</button>   
         </span>
@@ -42,7 +42,8 @@
             return{
                 track: null,
                 category: null,
-                category_options: []
+                category_options: [],
+                current_user: 'Anonymous'
             }
         },
         methods: {
@@ -77,6 +78,10 @@
             }
         },
         mounted(){
+            if(this.$route.query.username){
+                this.current_user = this.$route.query.username;
+                this.$refs.navBar.username = this.current_user
+            }
         }
     }
 </script>
