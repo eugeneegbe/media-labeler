@@ -11,7 +11,7 @@
                 title="View the next image">NEXT
                 IMAGE<font-awesome-icon class="arrow-icon" icon="fa fa-chevron-right" /></button>
         </div>
-        <div class="container px-0 bg-light">
+        <div class="editor-container px-0 bg-light">
             <div id="edit_image_info">
                 <p><strong><span class="pt-1 mt-1"></span>{{ this.selected_category }} </strong></p>
                 <div class="image-desc">
@@ -29,8 +29,8 @@
                     title="Save your edits">Save</button>
             </div>
         </div>
-        <div class="container px-1 bg.light edit-box">
-            <div v-if="this.track === 'gender'" class="container">
+        <div class="px-1 bg.light edit-box">
+            <div v-if="this.track === 'gender'" class="">
                 <h5>Gender</h5>
                 <!-- Add gender track here -->
                 <GenderContribution ref="genderContribution" :filename="this.images[this.index].filename" />
@@ -342,10 +342,24 @@ button.btn.btn-link {
 @media only screen and (max-width: 600px) {
     .mobile-navigator{
         display: block;
+        position: sticky;
+        height: 5rem;
     }
     .response{
         width: 10rem;
         float: left;
+    }
+    .edit-box{
+        margin-top: 3rem;
+    }
+    .next-image-btn-mobile,
+    .previous-image-btn-mobile {
+        color: white;
+        margin-top: 1rem;
+        font-weight: 300;
+    }
+    .image-desc{
+        margin-left: 0px;
     }
 }
 </style>

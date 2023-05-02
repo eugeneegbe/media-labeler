@@ -55,8 +55,26 @@ export default {
     .previous-image-btn{
       display: none;
     }
+
+    html,body {
+      height:100%;
+    }
+
     .mobile-navigator{
       display: block;
+      bottom: 0;
+      width: 100%;
+      position: absolute;
+      height: 100px;
+      background-color: #6690da;
+    }
+    .container{
+      overflow-y: auto;
+      overflow-x: hidden;
+      margin: 0px;
+      padding: 3px;
+      width: 100vw;
+      height: calc(100vh - 68px);
     }
 
     .mobile-navigator button{
