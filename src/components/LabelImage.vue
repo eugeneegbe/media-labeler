@@ -13,10 +13,10 @@
         </div>
         <div class="container px-0 bg-light">
             <div id="edit_image_info">
+                <p><strong><span class="pt-1 mt-1"></span>{{ this.selected_category }} </strong></p>
                 <div class="image-desc">
-                    <p><span id="image_name" title="Open this image on Wikimedia Commons">{{this.images[this.index].filename }}</span></p>
-                    <p>Categorie: &nbsp;<span id="image_categories"></span>{{ this.selected_category }}</p>
-                    <p>Full Link: &nbsp;<span id="image_link"><a :href="this.images[this.index].description_url">View on Wikimedia Commons</a></span></p>
+                    <p><strong>File name:</strong>&nbsp;&nbsp;<span id="image_name" title="Open this image on Wikimedia Commons">{{this.images[this.index].filename }}</span></p>
+                    <p><strong>Description:</strong>&nbsp;&nbsp;<span v-html="this.current_file_description"></span></p>
                 </div>
             </div>
         </div>
@@ -59,6 +59,7 @@ import CultureContribution from './CultureContribution';
 import ClothContribution from './ClothContribution';
 
 const base_url = 'https://comelab-server.toolforge.org';
+const try_base_url = 'http://localhost:5000';
 
 export default {
     name: 'LabelImage',
@@ -81,7 +82,8 @@ export default {
             track: '',
             selected_category: '',
             contribution_saved: null,
-            current_user: 'Anonymous'
+            current_user: 'Anonymous',
+            current_file_description: 'N/A'
         }
     },
 
@@ -91,12 +93,14 @@ export default {
             if (this.index === this.images.length) {
                 this.index = 0;
             }
+            this.getCurrentFileDescription();
         },
         prevImage() {
             this.index--;
             if (this.index === 0) {
                 this.index = this.images.length - 1
             }
+            this.getCurrentFileDescription();
         },
         makeContribution() {
             if (this.track) {
@@ -160,14 +164,24 @@ export default {
                 let response = await axios.get(base_url + '/images?category=' + this.selected_category);
                 if (response.status == 200) {
                     this.images = response.data
+                    this.getCurrentFileDescription()
                 } else {
                     this.$route.push({ name: 'HomePage' });
+                    console.log('could not fetch images')
+                }
+            },
+        async getCurrentFileDescription(){
+                let response = await axios.get(try_base_url + '/images/describe?filename='+ this.images[this.index].filename);
+                if (response.status == 200) {
+                    this.current_file_description = response.data
+                } else {
+                    this.current_file_description = 'N/A'
                     console.log('could not fetch images')
                 }
             }
     },
     mounted() {
-        
+
         let selectedTrack = this.$route.params.track;
         let selectedCategory = this.$route.params.category
         if (selectedTrack !== 'null' && selectedCategory !== 'null' ) {
@@ -176,7 +190,7 @@ export default {
             this.$refs.navBar.username = this.current_user
             this.selected_category = this.$route.params.category;
             this.fetchImages();
-            this.index = Math.floor(Math.random() * (this.images.length - 1))
+            this.index = Math.floor(Math.random() * (this.images.length - 1));
         } else {
             this.$route.push({ name: 'HomePage' });
         }
@@ -222,7 +236,7 @@ export default {
 }
 
 .image-desc {
-    font-size: 12px;
+    font-size: 0.7rem;
     line-height: 1.5;
     padding: 10px;
     box-sizing: border-box;
@@ -244,7 +258,6 @@ button.btn.btn-link {
 
 .edit-box {
     margin-top: 2rem;
-    padding: 15px;
     border: solid 1px #6690da;
     border-radius: 5px;
 }
@@ -252,7 +265,6 @@ button.btn.btn-link {
 .edit-box-header {
     position: relative;
     border-top: solid 1px #13caf0;
-    padding: 1rem;
 }
 
 .edit-publish-btn-group {

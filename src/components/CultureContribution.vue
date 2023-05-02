@@ -19,6 +19,9 @@
         </div>
         <div class="input-group mb-3">
             <p class="question">Do you think the food/culture depicted in the image is accurately represented by the file name or description?</p>
+            <span class="tooltip-btn" title="Note: This question is asking whether either the file name or description reflects Food as depicted in the image. Please select 'Yes' if either accurately reflects Food, 'No' if neither accurately reflects Food and 'I'm not sure' if you are uncertain">
+            ?
+            </span>
             <select v-model="this.culture_data.subject_relevance" class="response">
                 <option v-for="option in this.other_options" v-bind:value="option.name" v-bind:key="option.id">
                     {{ option.name }}

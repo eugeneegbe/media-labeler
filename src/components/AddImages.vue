@@ -3,26 +3,30 @@
     <p v-bind="this.message" hidden="{this.message}" class="alert alert-info" >{this.message}</p>
     <div class="container text-center  ">
         <span>
-            <h5 style="float:left">Enter a Wikimedia Commons Category </h5>
-            <h5 style="">Select a type</h5>
-        </span>
-        <span>
-            <div class="bb-4 category-text">
-                <input class="" v-model="this.category" type="text" placeholder="Category:African Foods" />
-                <select v-model="this.selected_category_type" class="cat-type">
-                <option v-for="option in this.category_types_options" v-bind:value="option.name" v-bind:key="option.id">
-                    {{ option.name }}
-                    </option>
-                </select>
-                <span class="ml-3 go-btn go">
+            <div class="category-text">
+                <div style="float:left">
+                    <h5>Enter a Wikimedia Commons Category </h5>
+                    <input class="" v-model="this.category" type="text" placeholder="Category:African Foods" />
+                </div>
+                <div class="type-select">
+                    <h5>Select a type</h5>
+                    <select v-model="this.selected_category_type" class="cat-type">
+                    <option v-for="option in this.category_types_options" v-bind:value="option.name" v-bind:key="option.id">
+                        {{ option.name }}
+                        </option>
+                    </select>
+                </div>
+                <div style="float:left" class="mt-3">
+                    <span class="ml-3 go-btn go">
                     <button v-on:click="saveImages()" type="button" class="btn btn-lg btn-outline-dark mr-5">Save</button>
-                </span>
+                    </span>
+                </div>
             </div>
         </span>
     </div>
-    <br>
-    <div v-if="this.categories.length > 1" class="container text-center  mt-5">
-        <h2>Below are the categories which have been added</h2>
+
+    <div v-if="this.categories.length > 1" class="container text-center">
+        <h2 >Below are the categories which have been added</h2>
         <br>
         <table id="productsTable" class="table table-bordered mt-4">
             <thead>
@@ -140,7 +144,7 @@
 }
 
 .go-btn{
-    margin-left: 4.5rem;
+    margin-left: 3.5rem;
     display: inline-flex;
     
 }
@@ -153,5 +157,25 @@
     font-size: 4rem !important;
     position: relative;
 }
+.container{
+    margin-top: 2.5rem;
+}
+@media only screen and (max-width: 600px) {
+    .category-text input {
+        width: 22rem;
+        margin-bottom: 1rem;
+    }
+    .type-select{
+        float: left;
+        margin-bottom: 2rem;
+    }
+    .cat-type{
+        width:  22rem;
+        float: left;
+    }
 
+    .container{
+        margin-top: 22rem;
+    }
+}
 </style>

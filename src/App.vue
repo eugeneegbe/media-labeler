@@ -21,4 +21,16 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.tooltip-btn {
+    margin-right: 1rem;
+    float: left;
+    font-size: 1rem;
+    border-radius: 6rem !important;
+    height: 1.5rem !important;
+    width: 1.5rem !important;
+    font-weight: bolder;
+    background-color: aqua;
+    cursor: pointer;
+}
 </style>
