@@ -10,7 +10,7 @@
         </div>
     </div>
     <div v-if="this.track">
-        <div>
+        <div class="category-select">
             <p class="">Select A Category</p>
             <select v-model="this.category" class="cat-type">
                 <option v-for="option in this.category_options" v-bind:value="option.name" v-bind:key="option.id">
@@ -109,6 +109,10 @@
     border-bottom: 1px solid black;
 }
 
+.select-track button{
+    margin: 1.5rem;
+}
+
 .go-btn{
     margin: auto;
     display: inline-flex;
@@ -126,5 +130,21 @@
     border: 0.5px solid;
     border-block-end-style: double;
     border-style: revert-layer;
+}
+
+@media only screen and (max-width: 600px) {
+    .select-track{
+        display: inline-grid;
+        margin-bottom: 13rem;
+    }
+    .select-track button{
+        margin: 0.5rem;
+    }
+    .category-select{
+        margin-top: 10px !important;
+    }
+    .cat-type{
+        width: 20rem;
+    }
 }
 </style>

@@ -19,14 +19,14 @@
         </div>
         <div class="input-group mb-3">
             <p class="question">Do you think the clothing/dresses depicted in the image is accurately represented by the file name or description?</p>
-            <span class="tooltip-btn" title="Note: This question is asking whether either the file name or description reflects Clothes/Dress as depicted in the image. Please select 'Yes' if either accurately reflects Clothes/Dress, 'No' if neither accurately reflects Clothes/Dress and 'I'm not sure' if you are uncertain.">
-            ?
-            </span>
             <select v-model="this.clothing_data.representation" class="response">
                 <option v-for="option in this.other_options" v-bind:value="option.name" v-bind:key="option.id">
                     {{ option.name }}
                 </option>
             </select>
+            <span class="tooltip-btn" title="Note: This question is asking whether either the file name or description reflects Clothes/Dress as depicted in the image. Please select 'Yes' if either accurately reflects Clothes/Dress, 'No' if neither accurately reflects Clothes/Dress and 'I'm not sure' if you are uncertain.">
+            ?
+            </span>
         </div>
         <div>
         </div>
@@ -84,4 +84,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+@media only screen and (max-width: 600px) {
+    .tooltip-btn{
+        margin-left: 10rem;
+        margin-right: 0;
+    }
+}
+
+</style>

@@ -23,7 +23,6 @@ export default {
 }
 
 .tooltip-btn {
-    margin-right: 1rem;
     float: left;
     font-size: 1rem;
     border-radius: 6rem !important;
@@ -32,5 +31,36 @@ export default {
     font-weight: bolder;
     background-color: aqua;
     cursor: pointer;
+    margin-left: 1rem !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .category-text input {
+        width: 22rem;
+        margin-bottom: 1rem;
+    }
+    .type-select{
+        float: left;
+        margin-bottom: 2rem;
+    }
+    .cat-type{
+        width:  22rem;
+        float: left;
+    }
+
+    /* .container{
+        margin-top: 22rem;
+    } */
+    .next-image-btn,
+    .previous-image-btn{
+      display: none;
+    }
+    .mobile-navigator{
+      display: block;
+    }
+
+    .mobile-navigator button{
+      font-size: large;
+    }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <NavBar ref="navBar"/>
+    <NavBar ref="navBar" />
     <div v-if="this.images.length > 1" class="container text-center  mt-3 mb-3">
         <div class="px-0 image-wrapper bg-light">
             <button v-on:click="prevImage()" class="previous-image-btn btn btn-link btn-lg desktop-img-nav"
@@ -15,7 +15,8 @@
             <div id="edit_image_info">
                 <p><strong><span class="pt-1 mt-1"></span>{{ this.selected_category }} </strong></p>
                 <div class="image-desc">
-                    <p><strong>File name:</strong>&nbsp;&nbsp;<span id="image_name" title="Open this image on Wikimedia Commons">{{this.images[this.index].filename }}</span></p>
+                    <p><strong>File name:</strong>&nbsp;&nbsp;<span id="image_name"
+                            title="Open this image on Wikimedia Commons">{{ this.images[this.index].filename }}</span></p>
                     <p><strong>Description:</strong>&nbsp;&nbsp;<span v-html="this.current_file_description"></span></p>
                 </div>
             </div>
@@ -49,6 +50,15 @@
     <div v-else class="">
         <h2> There are no images in this category</h2>
     </div>
+    <div class="mobile-navigator px-0 image-wrapper">
+        <button v-on:click="this.prevImage()" class=" previous-image-btn-mobile btn btn-link btn-lg desktop-img-nav"
+            title="View the previous image"><font-awesome-icon class="arrow-icon" icon="fa fa-chevron-left" />PREV
+            IMAGE</button>
+        <button v-on:click="this.nextImage()" id="" class="next-image-btn-mobile btn btn-link desktop-img-nav btn-lg"
+            title="View the next image">NEXT
+            IMAGE<font-awesome-icon class="arrow-icon" icon="fa fa-chevron-right" />
+        </button>
+    </div>
 </template>
 
 <script>
@@ -59,7 +69,7 @@ import CultureContribution from './CultureContribution';
 import ClothContribution from './ClothContribution';
 
 const base_url = 'https://comelab-server.toolforge.org';
-const try_base_url = 'http://localhost:5000';
+// const try_base_url = 'http://localhost:5000';
 
 export default {
     name: 'LabelImage',
@@ -171,7 +181,7 @@ export default {
                 }
             },
         async getCurrentFileDescription(){
-                let response = await axios.get(try_base_url + '/images/describe?filename='+ this.images[this.index].filename);
+                let response = await axios.get(base_url + '/images/describe?filename='+ this.images[this.index].filename);
                 if (response.status == 200) {
                     this.current_file_description = response.data
                 } else {
@@ -324,5 +334,18 @@ button.btn.btn-link {
 .region_alt {
     margin-left: 20px !important;
     height: max-content;
+}
+.mobile-navigator{
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .mobile-navigator{
+        display: block;
+    }
+    .response{
+        width: 10rem;
+        float: left;
+    }
 }
 </style>

@@ -5,7 +5,7 @@
         <span>
             <div class="category-text">
                 <div style="float:left">
-                    <h5>Enter a Wikimedia Commons Category </h5>
+                    <h5>Enter a Wikimedia Commons category </h5>
                     <input class="" v-model="this.category" type="text" placeholder="Category:African Foods" />
                 </div>
                 <div class="type-select">
@@ -25,8 +25,8 @@
         </span>
     </div>
 
-    <div v-if="this.categories.length > 1" class="container text-center">
-        <h2 >Below are the categories which have been added</h2>
+    <div v-if="this.categories.length > 1" class="categories-table container text-center">
+        <h5 >Below are the categories which have been added</h5>
         <br>
         <table id="productsTable" class="table table-bordered mt-4">
             <thead>
@@ -160,22 +160,27 @@
 .container{
     margin-top: 2.5rem;
 }
+
 @media only screen and (max-width: 600px) {
-    .category-text input {
-        width: 22rem;
+    h5{
+        float: left;
+        font-size: 1rem;
         margin-bottom: 1rem;
     }
-    .type-select{
-        float: left;
-        margin-bottom: 2rem;
+    .category-text input{
+        width: 22rem;
     }
     .cat-type{
-        width:  22rem;
-        float: left;
+        width: 22rem;
+        margin-left: 0px;
     }
-
-    .container{
-        margin-top: 22rem;
+    .go-btn{
+        margin-left: 0px;
+        margin-top: -20px;
+        margin-bottom: 1.5rem;
+    }
+    .categories-table{
+        margin-top: 10px !important;
     }
 }
 </style>
