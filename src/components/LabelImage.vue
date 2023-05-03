@@ -103,14 +103,14 @@ export default {
             if (this.index === this.images.length) {
                 this.index = 0;
             }
-            this.getCurrentFileDescription();
+            this.getCurrentFileDescription(this);
         },
         prevImage() {
             this.index--;
             if (this.index === 0) {
                 this.index = this.images.length - 1
             }
-            this.getCurrentFileDescription();
+            this.getCurrentFileDescription(this);
         },
         makeContribution() {
             if (this.track) {
@@ -174,20 +174,21 @@ export default {
                 let response = await axios.get(base_url + '/images?category=' + this.selected_category);
                 if (response.status == 200) {
                     this.images = response.data
-                    this.getCurrentFileDescription()
+                    this.getCurrentFileDescription(this)
                 } else {
                     this.$route.push({ name: 'HomePage' });
                     console.log('could not fetch images')
                 }
             },
-        async getCurrentFileDescription(){
-                let response = await axios.get(base_url + '/images/describe?filename='+ this.images[this.index].filename);
-                if (response.status == 200) {
-                    this.current_file_description = response.data
-                } else {
-                    this.current_file_description = 'N/A'
-                    console.log('could not fetch images')
-                }
+        getCurrentFileDescription(self){
+                axios.get(base_url + '/images/describe?filename='+ this.images[this.index].filename)
+                .then(function(response){
+                    if(response.status == 200){
+                        self.current_file_description = response.data
+                    }
+                }).catch(function (response) {
+                        self.current_file_description = response.response.data.data
+                });
             }
     },
     mounted() {
