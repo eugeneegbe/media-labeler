@@ -48,7 +48,7 @@
         </div>
     </div>
     <div v-else class="">
-        <h2> There are no images in this category</h2>
+        <h2> Loading ...</h2>
     </div>
     <div class="mobile-navigator px-0 image-wrapper">
         <button v-on:click="this.prevImage()" class=" previous-image-btn-mobile btn btn-link btn-lg desktop-img-nav"
@@ -280,9 +280,8 @@ button.btn.btn-link {
 
 .edit-publish-btn-group {
     position: absolute;
-    padding: 10px;
     right: 0;
-    top: 0;
+    top: 1px;
 }
 
 .edit-answer-box {
