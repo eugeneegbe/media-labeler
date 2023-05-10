@@ -2,6 +2,7 @@ import HomePage from './components/HomePage.vue'
 import LabelImage from './components/LabelImage.vue'
 import AddImages from './components/AddImages.vue'
 import UserContributions from './components/UserContributions.vue'
+import AboutPage from './components/AboutPage.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -25,6 +26,11 @@ const routes = [
         name: 'UserContributions',
         component: UserContributions,
         path: '/contributions'
+    },
+    {
+        name: 'AboutPage',
+        component: AboutPage,
+        path: '/about'
     }
 ]
 

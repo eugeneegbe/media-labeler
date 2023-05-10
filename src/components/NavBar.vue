@@ -14,9 +14,9 @@
                 <li class="nav-item">
                     <router-link class="nav-link logout-btn" :to="'/contributions'">Contributions</router-link>
                 </li>
-                <!-- <li class="nav-item">
-                    <router-link class="nav-link logout-btn" :to="'/add-images'">Add Images</router-link>
-                </li> -->
+                <li class="nav-item">
+                    <router-link class="nav-link logout-btn" :to="'/about'">About</router-link>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <li v-if="username == 'Anonymous'" class="nav-item">
