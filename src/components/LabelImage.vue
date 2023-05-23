@@ -173,7 +173,8 @@ export default {
         async fetchImages(){
                 let response = await axios.get(base_url + '/images?category=' + this.selected_category);
                 if (response.status == 200) {
-                    this.images = response.data
+                    const shuffled = response.data.sort(() => 0.5 - Math.random());
+                    this.images = shuffled.slice(0, 50)
                     this.getCurrentFileDescription(this)
                 } else {
                     this.$route.push({ name: 'HomePage' });
