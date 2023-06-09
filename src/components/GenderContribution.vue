@@ -1,13 +1,13 @@
 <template>
     <div class="contrib-questions">
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
             <p class="question">Is the gender of the person in the image clear or unclear (ambiguous)?</p>
             <select v-model="this.gender_data.clarity" class="response">
                 <option v-for="option in this.clarity_options" v-bind:value="option.name" v-bind:key="option.id">
                     {{ option.name }}
                 </option>
             </select>
-        </div>
+        </div> -->
         <div class="input-group mb-3">
             <p class="question">Which gender(s) do you think the person in the image could possibly identify as?</p>
             <select v-model="this.gender_data.identity_type" class="response">
