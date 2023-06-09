@@ -9,14 +9,14 @@
             </select>
             <input class="" v-model="this.culture_data.region_alt" v-if="this.culture_data.region === 'Other' " type="text" placeholder="Please Specify" />
         </div>
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
             <p class="question">How familiar are you with the cultural background of the food/culture item in the image?</p>
             <select v-model="this.culture_data.familiarity" class="response">
                 <option v-for="option in this.familiarity_options" v-bind:value="option.name" v-bind:key="option.id">
                     {{ option.name }}
                 </option>
             </select>
-        </div>
+        </div> -->
         <div class="input-group mb-3">
             <p class="question">Do you think the food/culture depicted in the image is accurately represented by the file name or description?</p>
             <select v-model="this.culture_data.subject_relevance" class="response">
