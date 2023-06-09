@@ -48,7 +48,7 @@
         </div>
     </div>
     <div v-else class="">
-        <h2> Loading ...</h2>
+        <h2> Loading ... (Please reload if this persists)</h2>
     </div>
     <div class="mobile-navigator px-0 image-wrapper">
         <button v-on:click="this.prevImage()" class=" previous-image-btn-mobile btn btn-link btn-lg desktop-img-nav"
