@@ -27,7 +27,7 @@
             ?
             </span>
         </div>
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
             <p class="question">Do you think the gender of the person depicted in the image is relevant to the subject matter or context?</p>
             <select v-model="this.gender_data.subject_relevance" class="response">
                 <option v-for="option in this.other_options" v-bind:value="option.name" v-bind:key="option.id">
@@ -37,7 +37,7 @@
             <span class="tooltip-btn" title="Note: The images are randomly generated and may or may not depict People">
             ?
             </span>
-        </div>
+        </div> -->
         <div>
         </div>
     </div>
