@@ -9,14 +9,14 @@
             </select>
             <input  class="region_alt" v-model="this.clothing_data.region_alt" v-if="this.clothing_data.region === 'Other' " type="text" placeholder="Please Specify" />
         </div>
-        <div class="input-group mb-3">
+        <!-- <div class="input-group mb-3">
             <p class="question">Do you think the clothing in the image accurately represents the culture or region it is associated with?</p>
             <select v-model="this.clothing_data.accuracy" class="response">
                 <option v-for="option in this.other_options" v-bind:value="option.name" v-bind:key="option.id">
                     {{ option.name }}
                 </option>
             </select>
-        </div>
+        </div> -->
         <div class="input-group mb-3">
             <p class="question">Do you think the clothing/dresses depicted in the image is accurately represented by the file name or description?</p>
             <select v-model="this.clothing_data.representation" class="response">
