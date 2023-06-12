@@ -19,11 +19,11 @@
             </select>
         </div>
         <br/>
-        <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category + '/' + this.current_user" class="btn go">
-        <span class="btn-next">
-            <button class="btn btn-lg btn-primary mr-5">Next</button>   
-        </span>
-    </router-link>
+        <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category + '/' + this.current_user" class="">
+            <span class="btn-next">
+                <button class="btn btn-lg btn-primary mr-5">Next</button>   
+            </span>
+        </router-link>
     </div>
 </template>
 
@@ -101,12 +101,6 @@
     float: left;
     font-size: 50px;
     margin-top: 300px;
-}
-.go{
-    font-size: 30px;
-}
-.go:hover{
-    border-bottom: 1px solid black;
 }
 
 .select-track button{
