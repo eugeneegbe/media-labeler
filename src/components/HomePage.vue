@@ -8,24 +8,23 @@
             <button  v-on:click="selectCulture()" type="button" class="btn btn-lg btn-outline-primary">Food/Culture</button>
             <button v-on:click="selectCloth()" type="button" class="btn btn-lg btn-outline-dark mr-5">Cloth/Dress</button>
         </div>
-    </div>
-    <div v-if="this.track">
-        <div class="category-select">
-            <p class="">Select A Category</p>
-            <select v-model="this.category" class="cat-type">
-                <option v-for="option in this.category_options" v-bind:value="option.name" v-bind:key="option.id">
-                    {{ option.name }}
-                </option>
-            </select>
+        <div v-if="this.track">
+            <div class="category-select">
+                <p class="">Select A Category</p>
+                <select v-model="this.category" class="cat-type">
+                    <option v-for="option in this.category_options" v-bind:value="option.name" v-bind:key="option.id">
+                        {{ option.name }}
+                    </option>
+                </select>
+            </div>
+            <br/>
+            <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category + '/' + this.current_user" class="">
+                <span class="btn-next">
+                    <button class="btn btn-lg btn-primary mr-5">Next</button>   
+                </span>
+            </router-link>
         </div>
-        <br/>
-        <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category + '/' + this.current_user" class="">
-            <span class="btn-next">
-                <button class="btn btn-lg btn-primary mr-5">Next</button>   
-            </span>
-        </router-link>
     </div>
-    <div></div>
 </template>
 
 <script>
@@ -113,6 +112,10 @@
     margin: 1.5rem;
 }
 
+.category-select{ 
+    margin-top: 5rem;
+}
+
 .btn-next{
     margin-right: 10px!important;
 }
@@ -135,8 +138,15 @@
     .select-track button{
         margin: 0.5rem;
     }
-    .category-select{
-        margin-top: 10px !important;
+    .category-select{ 
+        margin-top: 4rem;
+        margin-left: 5rem;
+    }
+    .category-select p{
+        margin-left: -2rem; 
+    }
+    .category-select select{
+        margin-left: -4.4rem;
     }
     .cat-type{
         width: 20rem;
