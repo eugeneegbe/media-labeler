@@ -20,8 +20,8 @@
         </div>
         <br/>
         <router-link v-if="this.category" :to="'/label/'+this.track+'/'+this.category + '/' + this.current_user" class="btn go">
-        <span class="go-btn">
-            <button class="btn btn-md btn-primary">Next</button>   
+        <span class="btn-next">
+            <button class="btn btn-lg btn-primary mr-5">Next</button>   
         </span>
     </router-link>
     </div>
@@ -113,15 +113,10 @@
     margin: 1.5rem;
 }
 
-.go-btn{
-    margin: auto;
-    display: inline-flex;
-}
-
-.go-btn p{
-    margin-top: 0rem!important;
+.btn-next{
     margin-right: 10px!important;
 }
+
 .cat-type{
     height: 2.5rem;
     margin-left: 2rem;
