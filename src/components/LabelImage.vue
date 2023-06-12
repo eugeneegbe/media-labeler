@@ -155,16 +155,27 @@ export default {
         },
         async sendContribution() {
             const contribution = this.makeContribution()
+            
             let result = await axios.post(base_url + '/contributions', contribution);
                 if (result.data == 'success') {
                     this.nextImage()
                     // We need to add flash message here for success
                     this.contribution_saved = true
-                    alert('contribution was saved')
                     this.clearAnswerField(this.track)
+                    this.$flashMessage.show({
+                        html: '<div style="padding: 20px;font-weight:">'+
+                                '<h4 style="font-weight: bolder">Success!</h4> <hr>'+
+                                '<p style="color: green; font-size:1.3rem">Your contribution was recorded</p>'+
+                            '</div>'
+                    });
                 } else {
                     this.contribution_saved = false
-                    console.log('saving did not work')
+                    this.$flashMessage.show({
+                        html: '<div style="padding: 20px;font-weight:">'+
+                                '<h4 style="font-weight: bolder">Something Went Wrong!</h4> <hr>'+
+                                '<p style="color: red; font-size:1.3rem">Contrbution was not recorded</p>'+
+                            '</div>'
+                    });
                 }
         },
         cancelContribution() {

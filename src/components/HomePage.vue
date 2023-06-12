@@ -26,7 +26,6 @@
         </router-link>
     </div>
     <div></div>
-    <FlashMessage :position="'right bottom'"></FlashMessage>
 </template>
 
 <script>

@@ -87,9 +87,19 @@
                     }
                 ).catch(function(response){
                     if (response.response){
-                        alert('Error\n\n' + response.response.data.message)
+                        this.$flashMessage.show({
+                        html: '<div style="padding: 20px;font-weight:">'+
+                                '<h4 style="font-weight: bolder">Something Went Wrong!</h4> <hr>'+
+                                '<p style="color: red; font-size:1.3rem">'+ response.response.data.message +'</p>'+
+                            '</div>'
+                        });
                     }else{
-                        alert(response.message)
+                        this.$flashMessage.show({
+                        html: '<div style="padding: 20px;font-weight:">'+
+                                '<h4 style="font-weight: bolder">Something Went Wrong!</h4> <hr>'+
+                                '<p style="color: red; font-size:1.3rem">'+ response.message+'</p>'+
+                            '</div>'
+                    });
                     }
                 });
             },
