@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import FlashMessage from '@smartweb/vue-flash-message';
 import VTooltip from "v-tooltip";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 
 library.add(faChevronLeft, faChevronRight)
 
