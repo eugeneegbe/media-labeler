@@ -143,7 +143,13 @@
         margin-left: 5rem;
     }
     .category-select p{
-        margin-left: -2rem; 
+        margin-left: -5rem; 
+    }
+    .btn-next{
+        float: left;
+        left: 10rem;
+        position: absolute;
+        margin-top: 5rem;
     }
     .category-select select{
         margin-left: -4.4rem;
