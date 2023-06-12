@@ -25,6 +25,8 @@
             </span>
         </router-link>
     </div>
+    <div></div>
+    <FlashMessage :position="'right bottom'"></FlashMessage>
 </template>
 
 <script>
@@ -61,12 +63,17 @@
                 this.checkSelectedFields();
             },
             async fetchCategories(track){
-                let response = await axios.get(base_url + '/categories?type='+ track);
-                console.log(response)
-                if (response.status == 200) {
+                try {
+                    let response = await axios.get(base_url + '/categories?type='+ track);
                     this.category_options = response.data
-                } else {
-                    console.log('could not get categories');
+                } catch (error) {
+                    console.log('error', error)
+                    this.$flashMessage.show({
+                        html: '<div style="padding: 20px;font-weight:">'+
+                                '<h4 style="font-weight: bolder">Something Went Wrong!</h4> <hr>'+
+                                '<p style="color: red; font-size:1.3rem">'+ error.message+'</p>'+
+                            '</div>'
+                    });
                 }
             },
             checkSelectedFields(){
