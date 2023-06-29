@@ -23,13 +23,13 @@
 
     <div v-if="this.categories.length > 0" class="categories-table-display text-center">
         <h5 >Below are the categories which have been added</h5>
-        <table id="productsTable" class="container text-center table table-bordered">
+        <table id="productsTable" class="table table-bordered mt-4">
             <thead>
                 <tr>
                     <td>No</td>
                     <td>Name</td>
                     <td>Type</td>
-                    <span><p>Action</p></span>
+                    <td>Action</td>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                     <td>{{category.id}}</td>
                     <td>{{category.name}}</td>
                     <td>{{category.type}}</td>
-                    <button class="btn" v-on:click="this.deleteCategory()">Delete</button>
+                    <td><button class="btn btn-md btn-danger" v-on:click="this.deleteCategory()">Delete</button></td>
                 </tr>
             </tbody>
         </table>
