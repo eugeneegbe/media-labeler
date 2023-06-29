@@ -1,6 +1,6 @@
 <template>
     <NavBar />
-    <div v-if="this.contributions.length > 1">
+    <div v-if="this.contributions.length > 0">
         <h2> All registered contributions</h2>
         <hr>
         <br>
@@ -46,8 +46,6 @@
         data(){
             return{
                 contributions: [{
-                    "accuracy": null,
-                    "clarity": "",
                     "created_at": "",
                     "depict_accuracy": "",
                     "filename": "",
