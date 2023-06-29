@@ -52,10 +52,6 @@ export default {
     },
     data() {
         return {
-            clarity_options: [
-                { id: 1, name: 'Clear' },
-                { id: 2, name: 'Unclear (Ambiguous)' }
-            ],
             identity_type_options: [
                 { id: 1, name: 'Male' },
                 { id: 2, name: 'Female' },

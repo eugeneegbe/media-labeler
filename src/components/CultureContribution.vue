@@ -51,11 +51,6 @@ export default {
                 { id: 6, name: 'Australia/Oceania' },
                 { id: 7, name: 'Other' }
             ],
-            familiarity_options: [
-                { id: 1, name: 'Very familiar' },
-                { id: 2, name: 'Somewhat familiar' },
-                { id: 3, name: 'Not familiar at all' }
-            ],
             other_options: [
                 { id: 1, name: 'Yes' },
                 { id: 2, name: 'No' },
@@ -64,7 +59,6 @@ export default {
 
             culture_data: {
                 region: '',
-                familiarity: '',
                 subject_relevance: '',
                 region_alt: '',
             }
@@ -74,7 +68,6 @@ export default {
         initialState(){
             return {
                 region: '',
-                familiarity: '',
                 subject_relevance: '',
                 region_alt: '',
             }

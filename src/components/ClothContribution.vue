@@ -60,7 +60,6 @@ export default {
             clothing_data: {
                 region: '',
                 region_alt: '',
-                accuracy: '',
                 representation: ''
             }
         }
@@ -70,7 +69,6 @@ export default {
             return {
                 region: '',
                 region_alt: '',
-                accuracy: '',
                 representation: ''
             }
         },
