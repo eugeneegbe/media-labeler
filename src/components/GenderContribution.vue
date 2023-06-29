@@ -69,9 +69,7 @@ export default {
             ],
             gender_data: {
                 identity_type: '',
-                clarity: '',
                 depict_accuracy: '',
-                subject_relevance: ''
             }
         }
     },
@@ -79,9 +77,7 @@ export default {
         initialState(){
             return {
                 identity_type: '',
-                clarity: '',
                 depict_accuracy: '',
-                subject_relevance: ''
             }
         },
         clearAllData() {
