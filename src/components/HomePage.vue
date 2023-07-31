@@ -147,7 +147,7 @@
     }
     .btn-next{
         float: left;
-        left: 10rem;
+        left: 8.5rem;
         position: absolute;
         margin-top: 5rem;
     }
