@@ -152,7 +152,8 @@
         margin-top: 5rem;
     }
     .category-select select{
-        margin-left: -4.4rem;
+        margin-left: -2rem;
+        width: auto;
     }
     .cat-type{
         width: 20rem;
