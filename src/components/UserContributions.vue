@@ -92,6 +92,9 @@
     .mobile{
         display: none;
     }
+    .download{
+        margin-right: 1.5rem;
+    }
 }
 
 </style>
