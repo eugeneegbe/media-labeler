@@ -11,8 +11,8 @@
                     <tr>
                         <td>No</td>
                         <td>User</td>
-                        <td>Type</td>
-                        <td>Filename</td>
+                        <td class="mobile">Type</td>
+                        <td class="mobile">Filename</td>
                         <td>Date</td>
                     </tr>
                 </thead>
@@ -20,8 +20,8 @@
                     <tr v-for="contribution in contributions" :key="contribution.id">
                         <td>{{contribution.id}}</td>
                         <td>{{contribution.username}}</td>
-                        <td>{{contribution.type}}</td>
-                        <td>{{contribution.filename}}</td>
+                        <td class="mobile">{{contribution.type}}</td>
+                        <td class="mobile">{{contribution.filename}}</td>
                         <td>{{contribution.created_at}}</td>
                     </tr>
                 </tbody>
@@ -86,6 +86,12 @@
 .download{
     float: right;
     margin-right: 4.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .mobile{
+        display: none;
+    }
 }
 
 </style>
